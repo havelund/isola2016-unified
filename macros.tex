@@ -7,8 +7,10 @@
 \usepackage{placeins}
 %\usepackage{kpfonts}
 
-\newcommand{\event}[1]{\ensuremath{\mathtt{#1}}}
-\newcommand{\code}[1]{\texttt{#1}}
+\usepackage{color}
+\definecolor{light-gray}{gray}{0.95}
+
+\newcommand{\name}[1]{\texttt{#1}}
 
 \newcommand{\ignore}[2]{
 {
@@ -40,19 +42,125 @@
 
 \usepackage{listings}
 
-\lstdefinelanguage{qea}
-{morekeywords={qea,accept,skip,next,if,do,Forall,Exists,success,failure,Where,Negated,defined,and,or,Join},
-sensitive=false,
-morestring=[b]',
-breaklines=true,
-basicstyle=\ttfamily\scriptsize,
-}
+\lstdefinelanguage{scala}{
+  morekeywords=
+    {package,import,class,object,trait,extends,with,match,
+     new,if,else,while,for,yield,def,val,var,this,case,
+     type,implicit,private,protected,abstract,final}, 
+  literate=
+      {=>}{{$\Rightarrow$ }}2
+      {\#\#}{{$\oplus\;$}}2
+      {|->}{{$\longmapsto\;$}}2
+      {-->}{{$\Longrightarrow\;$}}2
+      {->}{{$\rightarrow\;$}}2
+      {>>}{{$\gg$}}2
+      {++}{{$++$}}2
+      {|==}{{$\models$}}2
+  ,
+  sensitive=true, 
+  morecomment=[l]{//}, 
+  morecomment=[s]{/*}{*/},
+  escapeinside={(*}{*)},
+  stringstyle=\ttfamily,
+  %aboveskip=1mm,
+  %belowskip=1mm,
+  showstringspaces=false,
+  columns=flexible,
+  morestring=[b]",
+  %basicstyle={\scriptsize},
+  %numbers=left,
+  numberstyle=\scriptsize,
+  %moredelim=[is][\bf\em]{|}{|},
+  %moredelim=[is][\bf\em]{+}{+},
+  moredelim=[is][\em]{@}{@}
+} 
 
-\lstdefinelanguage{logfire} {
-  morekeywords={class,extends,val,def,if,else,implicit},
-  sensitive=false,
-  basicstyle=\ttfamily\scriptsize,
-}
+\lstdefinelanguage{oclinecore}{
+  morekeywords=
+    {class,invariant,self,attribute,property,derived,derivation,operation,body}, 
+  literate=
+      {->}{{$\rightarrow\;$}}2
+      {<=}{{$\le$}}2
+  ,
+  sensitive=true, 
+  morecomment=[l]{//}, 
+  morecomment=[s]{/*}{*/},
+  escapeinside={(*}{*)},
+  stringstyle=\ttfamily,
+  %aboveskip=1mm,
+  %belowskip=1mm,
+  showstringspaces=false,
+  columns=flexible,
+  morestring=[b]",
+  %basicstyle={\scriptsize},
+  %numbers=left,
+  numberstyle=\scriptsize,
+  %moredelim=[is][\bf\em]{|}{|},
+  %moredelim=[is][\bf\em]{+}{+},
+  moredelim=[is][\em]{@}{@}
+} 
+
+\lstdefinelanguage{zlang}{
+  morekeywords=
+    {}, 
+  literate=
+      {->}{{$\rightarrow\;$}}2
+      {<=}{{$\le$}}2
+      {Int}{{$\mathbb{Z}$}}2
+      {String}{{$\mathbb{C}^*$}}2
+  ,
+  sensitive=true, 
+  morecomment=[l]{//}, 
+  morecomment=[s]{/*}{*/},
+  escapeinside={(*}{*)},
+  stringstyle=\ttfamily,
+  %aboveskip=1mm,
+  %belowskip=1mm,
+  showstringspaces=false,
+  columns=flexible,
+  morestring=[b]",
+  %basicstyle={\scriptsize},
+  %numbers=left,
+  numberstyle=\scriptsize,
+  %moredelim=[is][\bf\em]{|}{|},
+  %moredelim=[is][\bf\em]{+}{+},
+  moredelim=[is][\em]{@}{@}
+} 
+
+\lstdefinelanguage{klang}{
+  morekeywords=
+    {class, req}, 
+  literate=
+      {->}{{$\rightarrow\;$}}2
+      {<=}{{$\le$}}2
+  ,
+  sensitive=true, 
+  morecomment=[l]{//}, 
+  morecomment=[s]{/*}{*/},
+  escapeinside={(*}{*)},
+  stringstyle=\ttfamily,
+  %aboveskip=1mm,
+  %belowskip=1mm,
+  showstringspaces=false,
+  columns=flexible,
+  morestring=[b]",
+  %basicstyle={\scriptsize},
+  %numbers=left,
+  numberstyle=\scriptsize,
+  %moredelim=[is][\bf\em]{|}{|},
+  %moredelim=[is][\bf\em]{+}{+},
+  moredelim=[is][\em]{@}{@}
+} 
+
+\newcommand{\scala}{\lstset{language=scala,backgroundcolor=\color{white}, frame=none,basicstyle={\small},frame=single}}
+
+\newcommand{\scalaimpl}{\lstset{language=scala,backgroundcolor=\color{light-gray}, frame=none,basicstyle={\small},frame=single}}
+
+\newcommand{\oclinecore}{\lstset{language=oclinecore,backgroundcolor=\color{white}, frame=none,basicstyle={\small}}}
+
+\newcommand{\zlang}{\lstset{language=zlang,backgroundcolor=\color{white}, frame=none,basicstyle={\small}}}
+
+\newcommand{\klang}{\lstset{language=klang,backgroundcolor=\color{white}, frame=none,basicstyle={\small}}}
 
 % -------
 % Themes:

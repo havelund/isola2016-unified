@@ -5,6 +5,7 @@
 \usepackage{pgfplots}
 \usepackage{graphics}
 \usepackage{placeins}
+\usepackage{subfigure}
 %\usepackage{kpfonts}
 
 \usepackage{color}
@@ -75,9 +76,8 @@
   moredelim=[is][\em]{@}{@}
 } 
 
-\lstdefinelanguage{oclinecore}{
-  morekeywords=
-    {class,invariant,self,attribute,property,derived,derivation,operation,body}, 
+\lstdefinelanguage{oclinecore}{  
+morekeywords={class,invariant,self,attribute,property,derived,derivation,operation,body,select,forAll}, 
   literate=
       {->}{{$\rightarrow\;$}}2
       {<=}{{$\le$}}2
@@ -152,11 +152,13 @@
   moredelim=[is][\em]{@}{@}
 } 
 
-\newcommand{\scala}{\lstset{language=scala,backgroundcolor=\color{white}, frame=none,basicstyle={\small},frame=single}}
+\newcommand{\scala}{\lstset{language=scala,backgroundcolor=\color{white}, frame=none,basicstyle={\small}}}
+\newcommand{\iscala}{\scala\lstinline} % inline scala
 
-\newcommand{\scalaimpl}{\lstset{language=scala,backgroundcolor=\color{light-gray}, frame=none,basicstyle={\small},frame=single}}
+\newcommand{\scalaimpl}{\lstset{language=scala,backgroundcolor=\color{white}, frame=none,basicstyle={\small}}}
 
 \newcommand{\oclinecore}{\lstset{language=oclinecore,backgroundcolor=\color{white}, frame=none,basicstyle={\small}}}
+\newcommand{\iocl}{\oclinecore\lstinline} % inline ocl
 
 \newcommand{\zlang}{\lstset{language=zlang,backgroundcolor=\color{white}, frame=none,basicstyle={\small}}}
 
@@ -245,3 +247,4 @@
 \newcommand{\temporalrover}{{\sc TemporalRover}}
 \newcommand{\staterover}{{\sc StateRover}}
 \newcommand{\aspectj}{{\sc AspectJ}}
+

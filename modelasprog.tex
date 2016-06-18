@@ -35,27 +35,21 @@ a collection of (current) loans.
 In many modeling situations such diagrams form the core of the modeling effort. Constraints can be added to such diagrams.
 For example one constraint could be that the number of copies of a book should be a number bigger than or equal to 1. Such a constraint can be added inside special constraint box on the diagram  in \ref{fig:library}, attached to the \name{Book} box
 with a dotted line. It is interesting to note, that such a ``box''
-with an associated constraint conceptually is very similar to the idea of a Z schema \cite{?}, as shown in Figure \ref{fig:book-z}.
+with an associated constraint conceptually is very similar to the idea of a Z schema \cite{?}, as shown in Figure \ref{fig:book-z}\footnote{Note that the constraint can actually be avoided in Z by defining the type of \name{copies} to be $\mathbb{N}_1$, the natural numbers starting from 1.}.
 This schema represents the fundamental concept of a model: a signature (the declaration of \name{name} and \name{copies} above the line with their types) and then zero or more axioms (below the line). 
 %
-Attempts have been made to provide textual versions of UML and SysML diagrams. An example is  the K specification language \cite{?}, that was developed at JPL. The \name{Book} class with the added constraint can be expressed in K as shown in Figure 
+Attempts have been made to provide textual versions of UML and SysML diagrams. An example is  the K specification language \cite{?}, that was developed at JPL. 
+The \name{Book} class with the added constraint can be expressed in K as shown in Figure 
 \ref{fig:book-k}, very similar
-to the Z specification.
-
+to the Z specification. 
 
 \begin{figure}
-\begin{center}
-\begin{tabular}{c}
-\begin{lstlisting}[language=zlang]
-- Book ----------
-|  name : String
-|  copies : Int
------------
-|  copies > 0
----------------
-\end{lstlisting}
-\end{tabular}
-\end{center}
+\begin{schema}{Book}
+	name: \seq CHAR \\
+	copies: \num
+\where
+	copies > 0
+\end{schema}
 \caption{Z model of books in a library}
 \label{fig:book-z}
 \end{figure}

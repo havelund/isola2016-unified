@@ -13,12 +13,7 @@
 
 \newcommand{\name}[1]{\texttt{#1}}
 
-\newcommand{\ignore}[2]{
-{
-\vspace{0.5cm}
-\noindent\color{red} *** IGNORING: '#1' discussion. See source.}
-\vspace{0.5cm}
-}
+\newcommand{\ignore}[1]{}
 
 \newcommand{\GR}[1]{\notethis{ForestGreen}{Giles}{#1}}
 \newcommand{\GRinline}[1]{{\color{ForestGreen}{#1}}}
@@ -152,6 +147,35 @@ morekeywords={class,invariant,self,attribute,property,derived,derivation,operati
   moredelim=[is][\em]{@}{@}
 } 
 
+\lstdefinelanguage{vdm}{
+  morekeywords=
+    {class,end,instance,variables,functions,types,operations,inv,
+    public,
+    token,set,of,map,to,nat,
+    forall,exists,in,dom,and,let,be,st,return,card,
+    pre,post}, 
+  literate=
+      {->}{{$\rightarrow\;$}}2
+      {==>}{{$\Rightarrow$}}2
+  ,
+  sensitive=true, 
+  morecomment=[l]{//}, 
+  morecomment=[s]{/*}{*/},
+  escapeinside={(*}{*)},
+  stringstyle=\ttfamily,
+  %aboveskip=1mm,
+  %belowskip=1mm,
+  showstringspaces=false,
+  columns=flexible,
+  morestring=[b]",
+  %basicstyle={\scriptsize},
+  %numbers=left,
+  numberstyle=\scriptsize,
+  %moredelim=[is][\bf\em]{|}{|},
+  %moredelim=[is][\bf\em]{+}{+},
+  moredelim=[is][\em]{@}{@}
+}
+
 \newcommand{\scala}{\lstset{language=scala,backgroundcolor=\color{white}, frame=none,basicstyle={\small}}}
 \newcommand{\iscala}{\scala\lstinline} % inline scala
 
@@ -247,4 +271,5 @@ morekeywords={class,invariant,self,attribute,property,derived,derivation,operati
 \newcommand{\temporalrover}{{\sc TemporalRover}}
 \newcommand{\staterover}{{\sc StateRover}}
 \newcommand{\aspectj}{{\sc AspectJ}}
+\newcommand{\vdmpp}{VDM$^{++}$}
 

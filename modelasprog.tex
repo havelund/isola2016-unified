@@ -32,33 +32,58 @@ a collection of (current) loans.
 \label{fig:library}
 \end{figure}
 
-In many modeling situations such diagrams form the core of the modeling effort. Constraints can be added to such diagrams.
-For example one constraint could be that the number of copies of a book should be a number bigger than or equal to 1. Such a constraint can be added inside special constraint box on the diagram  in \ref{fig:library}, attached to the \name{Book} box
+In many modeling situations such diagrams form the core of the 
+modeling effort. Constraints can be added to such diagrams.
+For example one constraint could be that the number of copies of a 
+book should be a number bigger than or equal to 1. Such a 
+constraint can be added inside special constraint box on the 
+diagram  in \ref{fig:library}, attached to the \name{Book} box
 with a dotted line. It is interesting to note, that such a ``box''
-with an associated constraint conceptually is very similar to the idea of a Z schema \cite{?}, as shown in Figure \ref{fig:book-z}\footnote{Note that the constraint can actually be avoided in Z by defining the type of \name{copies} to be $\mathbb{N}_1$, the natural numbers starting from 1.}.
-This schema represents the fundamental concept of a model: a signature (the declaration of \name{name} and \name{copies} above the line with their types) and then zero or more axioms (below the line). 
+with an associated constraint conceptually is very similar to the 
+idea of a Z schema \cite{?}, as shown in Figure \ref{fig:book-z}
+\footnote{Note that the constraint can actually be avoided in Z by 
+defining the type of \name{copies} to be $\mathbb{N}_1$, the 
+natural numbers starting from 1.}.
+This schema represents the fundamental concept of a model: a 
+signature (the declaration of \name{name} and \name{copies} above 
+the line with their types) and then zero or more axioms (below the 
+line). 
 %
-Attempts have been made to provide textual versions of UML and SysML diagrams. An example is  the K specification language \cite{?}, that was developed at JPL. 
+Attempts have been made to provide textual versions of UML and 
+SysML diagrams. An example is  the K specification language 
+\cite{?}, that was developed at JPL. 
 The expression language of K as well as Z 
 (what is written in constraints) is predicate 
 logic. Both languages support datatypes such as sets, including 
-advanced set expressions such as set comprehension. K is object-oriented and is inspired by languages  such as Z, VDM \cite{?} and RAISE \cite{?}. 
+advanced set expressions such as set comprehension. K is object-
+oriented and is inspired by languages  such as Z, VDM \cite{?} and 
+RAISE \cite{?}. 
 
-Another alternative such textual notation is OCLInEcore \cite{?}, which is an attempt 
+Another alternative such textual notation is OCLInEcore \cite{?}, 
+which is an attempt 
 to define a textual language combining the Ecore model
-of SysML with the OCL constraint language (Object Constraint Language) 
-\cite{?}. OCL is a declarative expression language that is now part of the UML 
-standard. OCL descended from Z, but is based on chained method calls read from left to right, starting from finite collections, in contrast to predicate logic. For example OCL does not have
-general universal and existential quantification over infinite sets. In predicate 
+of SysML with the OCL constraint language (Object Constraint 
+Language) 
+\cite{?}. OCL is a declarative expression language that is now 
+part of the UML 
+standard. OCL descended from Z, but is based on chained method 
+calls read from left to right, starting from finite collections, 
+in contrast to predicate logic. For example OCL does not have
+general universal and existential quantification over infinite 
+sets. In predicate 
 logic we would write a universal quantification over a set/type 
-$S$ as follows: $\forall x : S \bullet P(x)$. In OCL one would write this as:
-\iocl{S->forAll(x | P(x))}. However, OCL requires $S$ to be finite,
+$S$ as follows: $\forall x : S \bullet P(x)$. In OCL one would 
+write this as:
+\iocl{S->forAll(x | P(x))}. However, OCL requires $S$ to be 
+finite,
 in contrast to predicate logic, where $S$ can be infinite. This
-is the major distinction between OCL and predicate logic, in addition to the alternative syntax. OCL is executable, given
+is the major distinction between OCL and predicate logic, in 
+addition to the alternative syntax. OCL is executable, given
 a model instance.
 
 
-%The \name{Book} class with the added constraint can be expressed in K as shown in Figure 
+%The \name{Book} class with the added constraint can be expressed 
+%in K as shown in Figure 
 %\ref{fig:book-k}, very similar
 %to the Z specification. 
 
@@ -91,7 +116,8 @@ a model instance.
 %\end{figure}
 
 In order to illustrate OCLInEcore we expand our example by adding 
-the requirement that ``{\em the number of loans that a book is part 
+the requirement that ``{\em the number of loans that a book is 
+part 
 of should be less than or equal to the 
 number of copies of the book}''. The following OCLInEcore model 
 in Figure \ref{fig:book-oclinecore} formalizes this requirement.
@@ -138,8 +164,8 @@ type (those drawn as boxes in class diagrams).
 The property \name{library} links a book to the library it is part 
 of, and is the ``{\em opposite property}'' of the \name{books} 
 property of the \name{Library} (expressed using the \iocl{#}-
-notation), meaning that of a book is in the \name{books} set (a bag 
-in fact) of a library, then the library is also in the 
+notation), meaning that of a book is in the \name{books} set (a 
+bag in fact) of a library, then the library is also in the 
 \name{library} of the book. The `\iocl{?}' represents 0 or 1.
 
 The property \name{loans} denotes a collection of \name{Loan} 
@@ -150,14 +176,12 @@ its value provided as an OCL expression.
 The expression reads as follows: from this book (referred to as 
 \iocl{self} later in the expression), retrieve the library it is 
 part of, retrieve the 
-loans of this library, and select those for which the book is equal 
-to \iocl{self}. For a given collection \iocl{S}, the notation 
-\iocl{S->M(...)} 
-means calling the method \iocl{M} on the set \iocl{S}. Hence in 
-this case the
+loans of this library, and select those for which the book is 
+equal to \iocl{self}. For a given collection \iocl{S}, the 
+notation \iocl{S->M(...)} means calling the method \iocl{M} on the 
+set \iocl{S}. Hence in this case the
 \iocl{select(predicate)} method is defined on sets and returns the 
-subset of 
-elements of the set satisfying the predicate.
+subset of elements of the set satisfying the predicate.
 The operation \name{isAvailable} returns a Boolean, and is defined 
 by retrieving the loans as a collection, evaluate its size, and 
 compare to the 
@@ -165,9 +189,22 @@ number of copies available. Finally, the two invariants can be
 formulated, and their explanation should at this point be straight 
 forward.
 
-The main point we are trying to make here is that the OCLInEcore model, which in reality is very similar to a Z specification (signature + axioms), can (for the most part) be elegantly expressed in the Scala programming language. This is shown in Figure \ref{fig:book-scala}. The class \iscala{Book} extends the
-class \iscala{Block}, which offers various methods for writing models, including the \iscala{invariant} method uses to define invariants. What in the OCLInEcore model was the property \iscala{loans} and the operations \iscala{isAvailable}, are here modeled as methods (using the \iscala{def} keyword). Multiplicities such as \iocl{Loan[*]} are modeled using Scala's collection libraries, in this case \iscala{Set[Loan]}. The Scala definitions should be somewhat obvious. It is clear that Scala in this case
-can model this problem as well as OCLInEcore. In addition, Scala offers so much more than OCLInEcore, such as an actual programming language.
+The main point we are trying to make here is that the OCLInEcore 
+model, which in reality is very similar to a Z specification 
+(signature + axioms), can (for the most part) be elegantly 
+expressed in the Scala programming language. This is shown in 
+Figure \ref{fig:book-scala}. The class \iscala{Book} extends the
+class \iscala{Block}, which offers various methods for writing 
+models, including the \iscala{invariant} method uses to define 
+invariants. What in the OCLInEcore model was the property 
+\iscala{loans} and the operations \iscala{isAvailable}, are here 
+modeled as methods (using the \iscala{def} keyword). 
+Multiplicities such as \iocl{Loan[*]} are modeled using Scala's 
+collection libraries, in this case \iscala{Set[Loan]}. The Scala 
+definitions should be somewhat obvious. It is clear that Scala in 
+this case can model this problem as well as OCLInEcore. In 
+addition, Scala offers so much more than OCLInEcore, such as an 
+actual programming language.
 
 \begin{figure}
 \begin{center}
@@ -227,8 +264,11 @@ class Book extends Model {
 \caption{Support for defining invariants in Scala}
 \end{figure}
 
-The only code that has to be written to provide support for writing
-class invariants is the definition of the class \iscala{Block}, which is shown in Figure \ref{fig:invariant-scala}. Without going into details, the class defines a method \iscala{invariant},
+The only code that has to be written to provide support for 
+writing
+class invariants is the definition of the class \iscala{Block}, 
+which is shown in Figure \ref{fig:invariant-scala}. Without going 
+into details, the class defines a method \iscala{invariant},
 which as argument takes a Boolean call-by-name argument 
 The argument is not evaluated before the method is called, 
 rather, it is only evaluated whenever referred to. In this case
@@ -239,7 +279,9 @@ of which can then be evaluated with a call of \iscala{evaluate}.
 \subsection{VDM Specifications}
 \label{sec:vdm-in-scala}
 
-As another example, we shall consider a a chemical plant alarm management system, first modeled in \vdmpp{} in \cite{vdmplusplus05} and also modeled in Scala in 
+As another example, we shall consider a a chemical plant alarm 
+management system, first modeled in \vdmpp{} in 
+\cite{vdmplusplus05} and also modeled in Scala in 
 \cite{?}. We show here a slight modification of 
 the \vdmpp{} specification as well as the 
 corresponding Scala program. In \cite{vdmplusplus05}
@@ -252,26 +294,35 @@ The system shall manage the calling out of experts to deal with
 operational faults discovered in a 
 chemical plant. 
 Two operations must be provided.
-\name{ExpertToPage}: Upon detection of a faulty condition, an alarm is raised, and an expert on duty is assigned to
+\name{ExpertToPage}: Upon detection of a faulty condition, an 
+alarm is raised, and an expert on duty is assigned to
 handle the alarm. Each alarm is associated with a specific 
 qualification required to fix the causing
 problem, and each expert is associated with a set of 
 qualifications. Upon an alarm, an expert must be found, and paged, 
-that is on duty during the corresponding period and with the right qualification.    
-\name{ExpertIsOnDuty}: return the periods on which an expert is on duty.      
+that is on duty during the corresponding period and with the right 
+qualification.    
+\name{ExpertIsOnDuty}: return the periods on which an expert is on 
+duty.      
 In addition, the state of the system must satisfy the following
 {\em invariant}:
 (i) There must be experts on duty during all periods 
 allocated in the system. 
-(ii) For any alarm and for any period, there should exist an expert assigned to that period that has the qualification required
+(ii) For any alarm and for any period, there should exist an 
+expert assigned to that period that has the qualification required
 to fix the source problem of the alarm.
 
 The \vdmpp{} class \name{Plant} in Figure \ref{fig:plant-vdm} 
 is part of the model of this system (other classes/types shown in
 \cite{vdmplusplus05} have been left out here: 
 \name{Alarm}, \name{Period}, and \name{Expert}).
-The body of this class is divided into three sections: {\em instance variables} (mutable variables), {\em functions} (with no side-effects) and {\em operations} (with side-effects). An invariant defined by the function \name{PlantInv} is imposed on the instance variables. We shall not go into the further details
-but just refer to the corresponding Scala program modeling the plant in Figure \ref{fig:plant-scala}.
+The body of this class is divided into three sections: {\em 
+instance variables} (mutable variables), {\em functions} (with no 
+side-effects) and {\em operations} (with side-effects). An 
+invariant defined by the function \name{PlantInv} is imposed on 
+the instance variables. We shall not go into the further details
+but just refer to the corresponding Scala program modeling the 
+plant in Figure \ref{fig:plant-scala}.
 
 \begin{figure}
 \begin{center}
@@ -327,7 +378,8 @@ trait Plant extends Model {
 
   invariant{PlantInv(alarms, schedule)}
 
-  def PlantInv(alarms: Set[Alarm], schedule: Map[Period, Set[Expert]]): Boolean =
+  def PlantInv(alarms: Set[Alarm], schedule: Map[Period, 
+  Set[Expert]]): Boolean =
     (schedule.keySet forall {p =>  schedule(p) != Set() }) &&
       (alarms forall { a =>
         schedule.keySet forall { p =>
@@ -361,4 +413,116 @@ trait Plant extends Model {
 \subsection{Domain Specific Languages}
 \label{sec:dsl-in-scala}
 
+We consider the ability to define domain-specific languages (DSLs) an 
+essential part of a modeling/programming framework. This form of activity is supported 
+within the UML/SysML community through meta-modeling and profiles, and forms
+a important part of the activities of that community. Programming languages have been
+slower to pick up this concept, although an early language such as LISP supported macros
+from its birth. A modern programming language such as Scala supports definition of
+so-called {\em internal DSLs} with a collection of a few but convenient 
+language features. In this section we shall illustrate this with an example
+DSL for monitoring event sequences. The example was also listed in \cite{?}.
+An internal DSL is an extension of the programming language, in this case 
+effectively an API, however, expressed in such a way that use of this API
+has the flavor of new syntax added to the language.
 
+\begin{figure}
+\begin{center}
+\begin{tabular}{c}
+\begin{lstlisting}[language=scala]
+class LockOrder extends Monitor { 
+  "acquire" -- 'acquire('t, 'l) |-> insert('Locked('t, 'l))
+  "release" -- 'Locked('t, 'l) & 'release('t, 'l) |-> remove('Locked)
+  "edge"    -- 'Locked('t, 'l1) & 'acquire('t, 'l2) |-> insert('Edge('l1, 'l2))
+  "cycle"   -- 'Edge('l1, 'l2) & 'Edge('l2, 'l1) |-> fail() 
+}
+\end{lstlisting}
+\end{tabular}
+\end{center}
+\caption{Scala program monitoring lock operations}
+\label{fig:deadlocks-scala}
+\end{figure}
+
+The DSL illustrated here is LogFire \cite{havelund-logfire-sttt14},
+created for writing trace properties. We shall not go into details
+of LogFore (the reader is referred to \cite{havelund-logfire-sttt14}),
+but only show a model written in this DSL, and briefly explain how the
+DSL is defined. LogFire is a DSL for rule-based programming. A monitor is specified as 
+a set of rules, each of the form: 
+
+\[
+  \textit{name}\ \verb+--+\ \textit{condition}_1\ \& \ldots \&\ \textit{condition}_n\ \longmapsto\  \textit{action}
+\]
+
+\noindent
+A rule consists of a left-hand side: a list of conditions, and a right-hand side:
+an action. The rules operate on a set of facts, the fact memory (efficiently implemented) 
+where conditions check the presence or absence of certain facts, and the action adds or deletes 
+facts, or execute any Scala code inserted as an action. Figure \ref{fig:deadlocks-scala} illustrates 
+a monitor which monitors $acquire(thread,lock)$ and $release(thread,lock)$ events,
+and attempts to determine if there is any two threads that access locks
+in a cyclic manner, which can lead to deadlocks (this is the dining philosopher problem). 
+A cycle is detected if for any two locks $l_1$ and $l_2$ there is an edge from
+$l_1$ to $l_2$ and from $l_2$ to $l_1$.
+
+The class contains four rules. Beyond the monitored events
+\iscala{acquire} and \iscala{release}, the monitor adds 
+and deletes \iscala{Locked(thread,lock)} facts (the thread holds
+the lock), and adds \iscala{Edge(lock1,lock)} facts, representing
+that there is an edge from \iscala{lock1} to \iscala{lock2}.
+The class extends the \iscala{Monitor} class which contains the
+DSL definitions that allows us to write rules in this manner.
+Specifically the functions: \iscala{--}, \iscala{&}, \iscala{|->},
+\iscala{insert}, \iscala{remove}, and \iscala{fail}. 
+
+We shall not here go into deep details about how this DSL is 
+implemented, other than to say that it relies on (1) Scala's
+allowance for methods having symbol names, such as \iscala{--}
+and \iscala{|->}, (2) allowance for method calls of the form 
+`\iscala{obj.method(arg)}' to be written 
+`\iscala{obj method arg}', and (3) automated insertion by 
+the compiler of 
+user-defined implicit functions that can lift values of one type 
+to a value of another type in places where the compiler's type 
+checker fails to type check an expression. For example part of
+the DSL implementation are the definitions shown in Figure
+\ref{fig:dsl-scala}.
+
+The implicit function \iscala{liftRuleName}, lifts a string (a
+rule name) to an anonymous object. That object defines the 
+\iscala{&} operator as well as the
+\iscala{|->} operator. The implicit function \iscala{liftRuleName} 
+gets invoked by the compiler automatically when a string is 
+followed by the symbol \iscala{--} which at first sight does not
+type check.
+
+\begin{figure}
+\begin{center}
+\begin{tabular}{c}
+\begin{lstlisting}[language=scala]
+implicit def liftRuleName(name: String) = 
+  new { 
+    def --(c: Condition) = new RuleDef(name, List(c)) 
+  }
+
+class RuleDef(name: String, conditions: List[Condition]) { 
+  def &(c: Condition) = new RuleDef(name, c :: conditions)
+
+  def |->(stmt: => Unit) { 
+    addRule(Rule(name, conditions.reverse, Action((x: Unit) => stmt))) } }
+\end{lstlisting}
+\end{tabular}
+\end{center}
+\caption{Scala rule DSL implementaton}
+\label{fig:dsl-scala}
+\end{figure}
+
+We do notice, however, some drawbacks of the Scala DSL.
+Notice the quoted names: \iscala{'acquire}, \iscala{'Locked}, 
+\iscala{'t}, etc. These are Scala symbols (elements of the type 
+\iscala{Symbol}). It is not possible in this form of DSL to avoid 
+these quotes. Likewise, the name of the rule is a string. 
+Furthermore, a monitor in this DSL cannot be type checked without 
+actually running the monitor. That is to say, Scala's DSL defining
+features are not optimal, although they do make defining internal 
+DSLs somewhat easier.

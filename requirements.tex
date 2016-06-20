@@ -1,32 +1,33 @@
 
 
-\section{Thoughts on Unifying Modeling and Programming}A specification, design and implementation language will have to 
-serve quite different goals. First of all, it has to represent the 
-concepts of the application domain at an adequate level of 
-abstraction such that the specialities of the applications domains 
+\section{Thoughts on Unifying Modeling and Programming}
+
+In this section we shall try to summarize our views on 
+unifying modeling and programming.
+
+A unified modeling and programming framework has to satisfy 
+quite different and contradicting goals.
+First of all, it has to represent the concepts of the 
+application domain at an adequate level of 
+abstraction such that the specialities of the applications 
 are directly represented and not covered by awkward implementation 
 concepts. This may for example include support for user-defined 
 extensions of the language with domain-specific languages (DSLs). 
 Second it has to address the structuring of algorithms and data 
-structures in a way such that programs stay understandable, modular 
-and support the most important methods of structured program 
-development. And finally it has to allow addressing specific 
-implementation properties of execution machines including their 
-operating systems, such that it can be controlled how the 
-implementation uses resources and exploits the possibilities of the 
-execution platform and its hardware. These three different goals are clearly in some contradiction. 
-Nevertheless in a piece of software all three goals have to be 
-addressed. What we would like to have is a specification, design, 
-and implementation language, which represents the concepts of the 
-application domain as adequate as possible, which allows at the 
-same time to structure the software in a readable and manageable 
-form, and which allows addressing of particular execution concepts 
-on the execution platform and the machine to the extent needed. An obvious problem here of course is to what extent then the 
-particular application domain influences the programming languages, 
-and to what extent this is true for the execution platform and also 
-for the different forms of structured design concepts. In this 
-section we shall try to outline what we see as the desired 
-requirements of a programming language. \subsection{Target domain}We can observe three major domains of interest, namely modeling; 
+structures in a way such that programs stay understandable, 
+modular and support the most important methods of structured 
+program development. And finally it has to allow addressing 
+specific implementation properties of execution machines including 
+their operating systems, such that it can be controlled how the 
+implementation uses resources and exploits the possibilities of 
+the execution platform and its hardware. An obvious problem here 
+of course is to what extent then the particular application domain 
+influences the programming language, and to what extent this 
+is true for the execution platform and efficiency concerns as
+well. In this section we shall try to outline what we see as the 
+concerns that need to be addressed in any attempt to unify the 
+view of modeling and 
+programming.\subsection{Target domain}We can observe three major domains of interest, namely modeling; 
 programming of non-critical systems, such as web applications, 
 including scripting; and finally programming of embedded/cyber-
 physical systems. It is clear that these three domains till date 

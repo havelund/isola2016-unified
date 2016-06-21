@@ -1,6 +1,168 @@
 
-\section{Conclusion}
-\label{sec:conclusion}We have in this paper outlined some views on the potential in 
+\section{Discussion and Conclusion}
+\label{sec:conclusion}
+
+
+\label{sec:concerns}
+
+A unified modeling and programming framework has to satisfy 
+quite different and contradicting goals.
+First of all, it has to represent the concepts of the 
+application domain at an adequate level of 
+abstraction such that the specialities of the applications 
+are directly represented and not covered by awkward implementation 
+concepts.  
+Second it has to address the structuring of algorithms and data 
+structures in a way such that programs stay understandable, 
+modular and support the most important methods of structured 
+program development. And finally it has to allow addressing 
+specific implementation properties of execution machines including 
+their operating systems, such that it can be controlled how the 
+implementation uses resources and exploits the possibilities of 
+the execution platform and its hardware. An obvious problem here 
+of course is to what extent the particular application domain 
+influences the programming language, and to what extent this 
+is true for the execution platform and efficiency concerns as
+well. In the following we shall briefly mention some of the
+elements to consider when imagining a unified approach to
+modeling and programming.
+
+
+\subsubsection{Target domains}
+
+We can observe three major domains of interest, namely modeling; 
+programming of non-embedded systems, such as web applications, 
+including scripting; and finally programming of embedded/cyber-
+physical systems. It is clear that these three domains till date 
+have been addressed by different communities and different 
+languages. The question is to what extent these
+quite different domains could be targeted with the same formalism.
+Note that the different modeling and programming languages used on
+different targets have an overwhelming number of language constructs in
+common, to an extent where this question at least needs to be answered
+in a scientific manner rather than in an opinionated emotional manner.
+
+\subsubsection{Predicate specifications}
+
+A formalism must generally support specifying properties as 
+predicates rather than only as algorithms. Predicate-oriented techniques 
+include design-by-contract, including pre- and post-conditions, as 
+well as state invariants. Such can for example be found in Eiffel 
+as  well as in SPARK. This concept can be carried 
+further to for example include behavioral sequence specification, 
+such as temporal logics, sequence diagrams, etc.
+Note, however, that many models are very operational in
+nature, and hence can very well best be formulated as state 
+machines, or programs (data structures and algorithms). 
+
+\subsubsection{Programming in the large}
+
+A formalism must support programming in the large, and in general
+provide good modularization and component-based development. One cannot discuss components without discussing concurrency. Concurrency is an essential part of modern programming, especially 
+considering the emergence of multi-core computers. However, 
+concurrency is important at the modeling level as well, where it 
+can serve as a natural way to describe interacting agents. 
+Important concepts include agent systems, message passing based 
+communication, parallel data structures (programming concurrent 
+without knowing it), and distributed programming.
+
+\subsubsection{High-level programming}
+
+A formalism must support high-level programming as found in modern
+programming languages. The elegance  of functional programming has 
+been praised many times. Nevertheless its breakthrough is only 
+recent. In contrast, object-oriented programming, 
+which in particular addresses encapsulation and reuse, has been very 
+popular for decades now. A language such as Scala 
+integrates the two paradigms nicely, as even early versions 
+of LISP (CLOS) did. 
+Functional programming means for example functions as 
+values (lambda abstractions) and pattern matching, and of course 
+reliance on recursion. Functional programming is by some considered 
+the best approach to use multi-core systems due to no shared state 
+updates. A key feature of VDM was the introduction of elegant syntax for collections, such as sets, lists and maps. These days such concepts are introduced in languages mostly as libraries. Fortress has built-in syntax for these very similar to VDM.
+There should be easy ways of iterating through collections – to avoid indexing problems, as well as support for parallel computation over such.
+A formalism should be statically typed, although with type inference, and with allowance for going type less
+in clearly defined regions to support scripting. 
+Decades of experience in strong type systems should be harvested, including more recent  topics such as dependent types, session types, and units.
+
+\subsubsection{Low-level programming}
+
+A formalism must support low-level programming.Embedded programing often means: no dynamic memory 
+allocation after initialization, no garbage collection, some 
+knowledge of memory layout, even to the point where computation 
+with addresses is used to improve speed. This again means use of 
+low level programming languages such as C. C, however, allows for 
+memory errors and makes programmers less effective as they would 
+otherwise be were they allowed to program in higher-level 
+languages. We need to satisfy the needs encountered by typical C 
+programmers, including offering comparable speed and memory 
+control. This includes support for hardware control and
+targeting specific execution platforms 
+
+
+\subsubsection{Continuous mathematics}
+
+A formalism must support modeling of cyber-physical systems. That
+is: physical systems controlled by computer programs. To model (not program) a cyber-physical system, there is a need for describing
+continuous behavior using continuous mathematics, including
+for example differential equations, as supported by for example
+Modelica \cite{?}. Modelica is an object-oriented  
+language for modeling systems containing mechanical, electrical, electronic, hydraulic, thermal, control, electric power or process-oriented subcomponents. Models can be simulated.
+Similar tools are: Mathematica \cite{?} and
+MATLAB \cite{?}.
+
+
+\subsubsection{Domain-specific languages}
+
+A formalism must support definition of DSLs (Domain-Specific 
+Languages). A key to modeling and programming is to capture 
+the relevant concepts of the application domain. UML for example
+supports meta-modeling and profiles, used for defining (graphical)
+DSLs. The programming language community is still somewhat behind
+in this respect. It should be easy for developers to define new
+DSLs either external stand-alone, or internal extending the
+modeling/programming formalism.
+
+\subsubsection{Visualization}
+
+A formalism must be visualizable.
+Visualization is of extreme importance, as demonstrated by the 
+relative success of formalisms such as UML and SysML in the 
+engineering community, when compared 
+to formal methods textual notations. People generally are more at 
+ease looking at a 2-dimensional illustration when they encounter a 
+problem specification for the first
+time, and it eases communication. Whether visualization is useful 
+as well for entering
+and maintaining specifications is another matter. We do believe 
+that visualization and 
+text should match up, such that modification of one leads to 
+immediate change in the 
+other. Visualization is normally static, rendering static models as
+pictures. However, visualization can also be dynamic, of program 
+executions, illustrating how behavior evolves.
+
+\subsubsection{Analysis}
+
+A formalism must be analyzable.A key concept in a combined modeling and programming environment is 
+the support for advanced analysis of models/programs, including, 
+but also beyond, what is normally supported in standard programming 
+environments. This ranges from basic built-in support for unit 
+testing, over advanced testing capabilities, including test input 
+generation and monitoring, to concepts such as static analysis, 
+model checking, theorem proving and symbolic execution. A core 
+requirement, however, must be the practicality of these solutions. 
+The main emphasis should be put on automation. The average user 
+should be able to benefit from automated verification, without 
+having to do manual proofs. However, support for manual theorem 
+proving should also be possible, for example for core critical 
+algorithms. Integration of static and dynamic analysis will be 
+desirable: verify what is practically feasible, and test (monitor) 
+the remaining proof obligations.
+
+\subsubsection{Conclusion}
+We have in this paper outlined some views on the potential in 
 combining modeling and programming, supported by analysis 
 capabilities such as static analysis, model checking, theorem 
 proving, monitoring, and testing. We believe that the time is right 

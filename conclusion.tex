@@ -163,19 +163,36 @@ the remaining proof obligations.
 
 \subsubsection{What modelers do that programmers don't}
 
-A formalism must ...
-
-There are some essentialdifferences in the way one the one hand the model-based engineering community represent and operate on models, and on the other hand they way the formal methods and programming communities do.
-
-%Models/programs are data
-%AST is the central representation, the rest is syntax
-%Store models as disassembled data (in database)
-%Query models in database
-%Transforming models (models as data)
-%Compare models (in ways more advanced than “diff”)
-%Advanced? merge of models developed by multiple users
-%Build/edit models with GUIs
-
+A central question is how a model/program is 
+represented. Within the formal methods and programming communities
+this is simple: specifications/programs are represented as 
+text, exactly as typed in by a user. Any tools such as analyzers 
+and compilers read in the text and produce results. The 
+specification language or programming language is defined by a 
+grammar which succinctly defines what is the language of syntax 
+correct texts. In the case of a compiler it produces binary 
+code/byte code, which of course can be stored and used by other 
+programs. However, at the 
+core, the program text is the main reference, from which other 
+formats can be generated. A compiler will produce an 
+abstract syntax tree (AST) from the text, but it only lives as 
+long as the compiler runs. 
+The situation is different in the model-based 
+engineering community. Here the syntax is mostly graphical, 
+and it is not the main representation (and not of main 
+importance). Instead, abstract syntax is the key 
+representation, often stored in XML, from which everything else is generated. In support of collaborative environments there is even
+a push for storing models in databases, which can be accessed
+by multiple users simultaneously, hence a more sophisticated 
+approach than the text-based git repositories often used by
+programmers. Modelers furthermore have the habits if querying 
+models, transforming models,
+and generally consider models as data, in contrast to the
+programming community where data usually are separated from 
+programs. That is, from within a program one can usually not get
+access to the entire AST of the program itself, although often 
+limited forms of reflection are possible. These different views
+of representations is worthwhile investigating.
 
 \subsubsection{Conclusion}
 We have in this paper outlined some views on the potential in 

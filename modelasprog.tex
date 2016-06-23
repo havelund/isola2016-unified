@@ -33,7 +33,7 @@ associated a collection of (current) loans.
 \begin{figure}[ht]
 \centering
 \includegraphics[width=0.9\textwidth]{images/library.png}
-\caption{The book library}
+\caption{The book library (from \cite{?})}
 \label{fig:library}
 \end{figure}
 
@@ -166,7 +166,7 @@ class Book {
 \end{lstlisting}
 %\end{tabular}
 %\end{center}
-\caption{OCLInEcore model of books in a library}
+\caption{OCLInEcore model of books in a library (from \cite{?}, modified)}
 \label{fig:book-oclinecore}
 \end{figure}
 
@@ -211,9 +211,9 @@ actual programming language.
 %\begin{center}
 %\begin{tabular}{c}
 \begin{lstlisting}[language=scala,frame=single]
-class Book extends Model {
+trait Book extends Model {
   var name: String
-  var copies: Integer
+  var copies: Int
   var library: Library
 
   def loans: Set[Loan] =
@@ -221,14 +221,14 @@ class Book extends Model {
 
   def isAvailable(): Boolean =
     loans.size < copies
-      
+
   invariant("CopiesPositive") {
     copies > 0
-  } 
-       
-  invariant ("SufficientCopies") {
+  }
+
+  invariant("SufficientCopies") {
     loans.size <= copies
-  }       
+  }
 }
 \end{lstlisting}
 %\end{tabular}
@@ -241,23 +241,19 @@ class Book extends Model {
 \begin{center}
 \begin{tabular}{c}
 \begin{lstlisting}[language=scala]
-   class Model {
-     type Constraint = Unit => Boolean
+trait Model {
+  type Constraint = Unit => Boolean
 
-     var constraints: List[(String, Constraint)] = Nil
+  var constraints: List[(String, Constraint)] = Nil
 
-     def invariant(c: => Boolean) {
-       constraints ::= ("", (Unit => c))
-     }
+  def invariant(name: String)(c: => Boolean) {
+    constraints ::= (name, (Unit => c))
+  }
 
-     def invariant(name: String)(c: => Boolean) {
-       constraints ::= (name, (Unit => c))
-     }
-
-     def evaluate() {
-       for ((n, c) <- constraints) assert(c(), n)
-     }
-   }
+  def verify() {
+    for ((n, c) <- constraints) assert(c(), n)
+  }
+}
 \end{lstlisting}
 \end{tabular}
 \end{center}
@@ -274,7 +270,9 @@ which as argument takes a Boolean call-by-name argument
 The argument is not evaluated before the method is called, 
 rather, it is only evaluated whenever referred to. In this case
 it is stored, still unevaluated, in a list of invariants, all
-of which can then be evaluated with a call of \iscala{evaluate}.
+of which can then be verified on an object of this class 
+with a call of \iscala{verify}. Note that such invariants
+(specifications) in addition can be the target of more formal analysis, just as they can in a formal specification language.
 
 
 \subsection{VDM Specifications}
@@ -438,11 +436,11 @@ has the flavor of new syntax added to the language.
 %\begin{tabular}{c}
 \begin{lstlisting}[language=scala,frame=single]
 class NoLockCycles extends Monitor {
-  "r1" -- 'lock('t,'l) |-> 'Locked('t,'l)
-  "r2" -- 'Locked('t,'l) & 'unlock('t,'l) |-> remove('Locked)
-  "r3" -- 'Locked('t,'l1) & 'lock('t,'l2) |-> 'Edge('l1,'l2)
+  "r1" -- 'acquire('t,'l) |-> 'Locked('t,'l)
+  "r2" -- 'Locked('t,'l) & 'release('t,'l) |-> remove('Locked)
+  "r3" -- 'Locked('t,'l1) & 'acquire('t,'l2) |-> 'Edge('l1,'l2)
   "r4" -- 'Edge('l1,'l2) & 'Edge('l2,'l3) & not('Edge('l1,'l3)) |-> 'Edge('l1,'l3)
-  "r5" -- 'Edge('l1,'l2) |-> {if (get('l1) == get('l2)) fail()}
+  "r5" -- 'Edge('l1,'l2) |-> { if (get('l1) == get('l2)) fail() }
 }
 \end{lstlisting}
 %\end{tabular}
@@ -524,7 +522,7 @@ class RuleDef(name: String, conditions: List[Condition]) {
 \end{lstlisting}
 \end{tabular}
 \end{center}
-\caption{Scala rule DSL implementaton}
+\caption{Scala rule DSL implementation}
 \label{fig:dsl-scala}
 \end{figure}
 

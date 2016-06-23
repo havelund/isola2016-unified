@@ -138,9 +138,9 @@ bag in fact) of a library, then the library is also in the
 \name{library} of the book. The `\iocl{?}' represents 0 or 1.
 
 \begin{figure}
-\begin{center}
-\begin{tabular}{c}
-\begin{lstlisting}[language=oclinecore]
+%\begin{center}
+%\begin{tabular}{c}
+\begin{lstlisting}[language=oclinecore,frame=single,backgroundcolor=\color{light-gray}]
 class Book {
   attribute name : String;
   attribute copies : Integer;
@@ -164,8 +164,8 @@ class Book {
     loans->size() <= copies;     
 }
 \end{lstlisting}
-\end{tabular}
-\end{center}
+%\end{tabular}
+%\end{center}
 \caption{OCLInEcore model of books in a library}
 \label{fig:book-oclinecore}
 \end{figure}
@@ -208,9 +208,9 @@ addition, Scala offers so much more than OCLInEcore, such as an
 actual programming language.
 
 \begin{figure}
-\begin{center}
-\begin{tabular}{c}
-\begin{lstlisting}[language=scala]
+%\begin{center}
+%\begin{tabular}{c}
+\begin{lstlisting}[language=scala,frame=single]
 class Book extends Model {
   var name: String
   var copies: Integer
@@ -231,8 +231,8 @@ class Book extends Model {
   }       
 }
 \end{lstlisting}
-\end{tabular}
-\end{center}
+%\end{tabular}
+%\end{center}
 \caption{Scala program modeling books in a library}
 \label{fig:book-scala}
 \end{figure}
@@ -326,9 +326,9 @@ but just refer to the corresponding Scala program modeling the
 plant in Figure \ref{fig:plant-scala}.
 
 \begin{figure}
-\begin{center}
-\begin{tabular}{c}
-\begin{lstlisting}[language=vdm]
+%\begin{center}
+%\begin{tabular}{c}
+\begin{lstlisting}[language=vdm,frame=single,backgroundcolor=\color{light-gray}]
 class Plant
   instance variables
     alarms : set of Alarm;
@@ -363,16 +363,16 @@ class Plant
       return {p | p in set dom schedule & ex in set schedule(p)};
 end Plant
 \end{lstlisting}
-\end{tabular}
-\end{center}
+%\end{tabular}
+%\end{center}
 \caption{\vdmpp{} model of plant}
 \label{fig:plant-vdm}
 \end{figure}
 
 \begin{figure}
-\begin{center}
-\begin{tabular}{c}
-\begin{lstlisting}[language=scala]
+%\begin{center}
+%\begin{tabular}{c}
+\begin{lstlisting}[language=scala,frame=single]
 trait Plant extends Model {
   var alarms: Set[Alarm]
   var schedule: Map[Period, Set[Expert]]
@@ -405,8 +405,8 @@ trait Plant extends Model {
     schedule.keySet filter { p => ex in schedule(p) }
 }
 \end{lstlisting}
-\end{tabular}
-\end{center}
+%\end{tabular}
+%\end{center}
 \caption{Scala program modeling plant}
 \label{fig:plant-scala}
 \end{figure}
@@ -414,23 +414,29 @@ trait Plant extends Model {
 \subsection{Domain-Specific Languages}
 \label{sec:dsl-in-scala}
 
-We consider the ability to define domain-specific languages (DSLs) an 
-essential part of a modeling/programming framework. This form of activity is supported 
-within the UML/SysML community through meta-modeling and profiles, and forms
-a important part of the activities of that community. Programming languages have been
-slower to pick up this concept, although an early language such as LISP supported macros
-from its birth. A modern programming language such as Scala supports definition of
+We consider the ability to define domain-specific languages (DSLs) 
+an essential part of a modeling/programming framework. This form of 
+activity is supported 
+within the UML/SysML community through meta-modeling and profiles. 
+Programming languages have been slower to pick up this concept, 
+although an early language such as LISP supported macros
+from its birth. A modern programming language such as Scala 
+supports definition of
 so-called {\em internal} DSLs with a collection of a few 
-elegant language features. In this section we shall illustrate this with an example
-DSL for monitoring event sequences. The example was also listed in \cite{?}.
-An {\em internal} DSL is an extension of the programming language, in this case 
-effectively an API, however, expressed in such a way that use of this API
+elegant language features. In this section we shall illustrate this 
+with an example
+DSL for monitoring event sequences. The example was also listed in 
+\cite{?}.
+An {\em internal} DSL is an extension of the programming language, 
+in this case 
+effectively an API, however, expressed in such a way that use of 
+this API
 has the flavor of new syntax added to the language.
 
 \begin{figure}
-\begin{center}
-\begin{tabular}{c}
-\begin{lstlisting}[language=scala]
+%\begin{center}
+%\begin{tabular}{c}
+\begin{lstlisting}[language=scala,frame=single]
 class NoLockCycles extends Monitor {
   "r1" -- 'lock('t,'l) |-> 'Locked('t,'l)
   "r2" -- 'Locked('t,'l) & 'unlock('t,'l) |-> remove('Locked)
@@ -439,8 +445,8 @@ class NoLockCycles extends Monitor {
   "r5" -- 'Edge('l1,'l2) |-> {if (get('l1) == get('l2)) fail()}
 }
 \end{lstlisting}
-\end{tabular}
-\end{center}
+%\end{tabular}
+%\end{center}
 \caption{Scala program monitoring lock operations}
 \label{fig:deadlocks-scala}
 \end{figure}
@@ -459,7 +465,7 @@ A monitor is specified as a set of rules, each of the form:
 A rule consists of a left-hand side: a list of conditions, and a 
 right-hand side:
 an action. The rules operate on a set of facts, the 
-{\em fact memory} (efficiently implemented) 
+{\em fact memory} (implemented as a RETE network \cite{?}) 
 where conditions check the presence or absence of certain facts, 
 and the action adds or deletes 
 facts, or execute any Scala code inserted as an action. Figure 
@@ -469,8 +475,7 @@ $release(thread,lock)$ events emitted from an instrumented
 multi-threaded application, that uses locks to protect against
 data races. The monitor attempts to determine whether any 
 group of threads access locks
-in a cyclic manner, which can lead to deadlocks (the classical
-dining philosopher problem). 
+in a cyclic manner, which potentially can lead to deadlocks (the classical dining philosopher problem). 
 A cycle is detected if for any lock $l$ there is 
 an edge from $l$ back to itself.
 
@@ -478,14 +483,10 @@ The class contains five rules. Beyond the monitored events
 \iscala{acquire} and \iscala{release}, the monitor adds 
 and deletes \iscala{Locked(thread,lock)} facts (the thread holds
 the lock), and adds \iscala{Edge(lock1,lock2)} facts, representing
-that there is an edge from \iscala{lock1} to \iscala{lock2}.
-The class extends the \iscala{Monitor} class which contains the
-DSL definitions that allows us to write rules in this manner.
-Specifically the functions: \iscala{--}, \iscala{&}, \iscala{|->},
-\iscala{insert}, \iscala{remove}, and \iscala{fail}. 
+that there is an edge from \iscala{lock1} to \iscala{lock2}, indicating that a thread holds  \iscala{lock1} while acquiring
+\iscala{lock2}. The class extends the \iscala{Monitor} class which contains the DSL definitions that allows us to write rules in this manner. Specifically the functions: \iscala{--}, \iscala{&}, \iscala{|->}, \iscala{remove}, and \iscala{fail}. 
 
-We shall not here go into deep details about how this DSL is 
-implemented, other than to say that it relies on (1) Scala's
+The implementation of this DSL relies on (1) Scala's
 allowance for methods having symbol names, such as \iscala{--}
 and \iscala{|->}, (2) allowance for method calls of the form 
 `\iscala{obj.method(arg)}' to be written 
@@ -496,14 +497,13 @@ to a value of another type in places where the compiler's type
 checker fails to type check an expression. For example part of
 the DSL implementation are the definitions shown in Figure
 \ref{fig:dsl-scala}.
-
-The implicit function \iscala{liftRuleName}, lifts a string (a
+The implicit function \iscala{liftRuleName} lifts a string (a
 rule name) to an anonymous object. That object defines the 
 \iscala{&} operator as well as the
 \iscala{|->} operator. The implicit function \iscala{liftRuleName} 
 gets invoked by the compiler automatically when a string is 
-followed by the symbol \iscala{--} which at first sight does not
-type check.
+followed by the symbol \iscala{--}, which does not
+type check (without this implicit function in scope).
 
 \begin{figure}
 \begin{center}
@@ -518,7 +518,9 @@ class RuleDef(name: String, conditions: List[Condition]) {
   def &(c: Condition) = new RuleDef(name, c :: conditions)
 
   def |->(stmt: => Unit) { 
-    addRule(Rule(name, conditions.reverse, Action((x: Unit) => stmt))) } }
+    addRule(Rule(name, conditions.reverse, Action((x: Unit) => stmt))) 
+  } 
+}
 \end{lstlisting}
 \end{tabular}
 \end{center}

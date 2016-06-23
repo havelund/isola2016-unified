@@ -5,30 +5,30 @@
 In this section we briefly survey some trends in the fields of
 formal methods, model-based engineering, and programming, that we find worthwhile highlighting.
 
-\subsection{Formal methods}Early work on formal methods include the work of John Mclarthy, 
-Robert Floyd (Assigning Meanings to Programs), Edsger Dijkstra (A 
-Discipline of Programming), Tony Hoare (An Axiomatic Basis for 
-Computer Programming), and Dana Scott and Christopher Strachey 
-(Towards a Mathematical Semantics for Computer Languages), to 
-mention a few. These ideas were theoretic in nature and deeply 
+\subsection{Formal Methods}Early work on formal methods include the work of John McCarthy 
+(A Basis for a Mathematical Theory of Computation), Robert Floyd (Assigning Meanings to Programs), Edsger 
+Dijkstra (A Discipline of Programming), Tony Hoare (An Axiomatic 
+Basis for Computer Programming), and Dana Scott and Christopher 
+Strachey (Towards a Mathematical Semantics for Computer Languages), 
+to mention a few. These ideas were theoretic in nature and deeply 
 influential. They brought us the ideas of  annotating programs with 
 assertions, such as pre- and post-conditions, and invariants, 
 correct by construction development (refinement), and giving 
-semantics to programming languages (denotational semantics). These ideas were subsequently the basis for several, what we could 
-call second generation, formal specification languages such as VDM, 
-RAISE, Z, TLA, and CIP. Each of these languages were full 
+semantics to programming languages. These ideas were subsequently the basis for several, what we could 
+call, second generation formal specification languages such as 
+VDM, Z, CIP, TLA, and RAISE, to mention just a few of the earlier ones. Each of these languages were full 
 specification languages, with rich type systems and detailed rules 
-(grammars) for what constituted a valid specification. These 
-languages were ahead of their time wrt. language constructs in the 
-sense that many of the language features found in these languages 
-slowly are finding their way into modern programming languages of 
-today. The VDM language for example was a wide-spectrum specification 
+(grammars) for what constitutes a valid specification. These 
+languages were ahead of their time wrt. language features in the 
+sense that many of these features have found their 
+way into modern programming languages of today. A particular
+example of this is collections (sets, lists, and maps).The VDM language for example was a wide-spectrum specification 
 language offering a combination of high-level specification 
 constructs and low level programming constructs. The methodology 
 consists in part, as in CIP, of refining a high-level specification 
 into a program in a stepwise manner. The language offered concepts 
-such as the combination of imperative (procedural and later object 
-oriented in VDM++) and functional programming; exceptions; 
+such as the combination of imperative (procedural and later 
+object-oriented in \vdmpp) and functional programming; exceptions; 
 algebraic data types and pattern matching; functions as values and 
 lambda abstractions; built-in collection types such as sets, lists 
 and maps, with mathematical notation for creating values of these 
@@ -41,17 +41,17 @@ so-called model-oriented specification languages, meaning that a
 specification is an example model of the desired system. This means 
 that such specifications are somewhat close to high-level programs. 
 This is in contrast to so-called property oriented specification 
-languages, such as OBJ.  A different branch of formal methods include theorem proving and 
+languages, such as OBJ, where a specification denotes a set of models.  A different branch of formal methods include theorem proving and 
 model checking. In theorem proving we have seen specification 
 languages, which resemble functional programming languages, 
-including for example ACL, PVS and Coq. In model checking early 
+including for example ACL, PVS and Coq. In model checking, early 
 work focused on modeling notations somewhat removed from 
 programming languages. However, recent research has focused on 
 software model checking, where the target of model checking is 
 code, as for example seen in the Java PathFinder model checker, 
 JPF. JPF was created due to the observation that a powerful 
-programming language might be a better modeling language than the, 
-at the time existing, model checker input languages. Today’s 
+programming language might be a better modeling language than the 
+traditional model checker input languages. Today’s 
 efforts in model checking furthermore include numerous efforts in 
 model checking of C programs.As can be seen from the above discussion, formal specification 
 languages have for a long time been flirting with programming 
@@ -68,47 +68,48 @@ programming language) when the two languages are too similar. This
 is an argument for merging the concepts into a  specification, 
 design and implementation language.
 
-\subsection{Model-based engineering}Model-based engineering includes modeling frameworks that are 
+\subsection{Model-based Engineering}Model-based engineering includes modeling frameworks that are 
 usually visual/graphical of nature. One of the main contributions 
 in this field is UML for software development, and its derivatives, 
 such as SysML for systems development. The graphical nature of the 
 UML family of languages has caused it to become rather popular and 
-wide-spread in engineering communities. Engineers are at first 
-encounter more willing to work with graphical notations, such as 
+wide-spread in engineering communities. Engineers are more willing 
+to work with graphical notations, such as 
 class diagrams and state machines, than they are working with sets, 
 lists and maps and function definitions. It seems clearly more 
 accepted than formal methods as described in the previous section. 
 At JPL for example, there are three people working with formal 
 methods and over hundred working with UML/SysML technology. One of the important notations in UML/SysML is class diagrams. 
-Class diagrams are – just like E/R-diagrams – really a simple way 
+Class diagrams are, just like E/R-diagrams, really a simple way 
 of defining data, an alternative to working with sets, lists and 
 maps as found in VDM and modern programming languages. For example, 
 to state that a person can own zero or more cars one draws a box 
 for Person and a box for Car and draws a line between them. It is 
 an idea that quickly be picked up by a systems engineer, quicker 
-than learn to program with sets. Another notation is that of state 
+than learning to program with sets. 
+Another notation is that of state 
 machines, a concept that strangely enough has not found its way 
 into programming languages, in spite of its usefulness in 
-especially embedded programming. UML/SysML also focuses to some 
-extent on requirements, a concept that usually is not embedded as a 
-first class object in programming. It would be interesting to see 
-requirements as part of programming.The above observations are rather positive. However, UML/SysML are 
-very complex and weakly defined formalisms. The combined syntax for 
-all UML for example corresponds to the sum of approximately 20 
-programming languages (approximately 17,000 lines of abstract 
-syntax, a programming language can normally be defined in between 
-500 and 2500 lines of grammar rules). The UML/SysML standards are 
-long and complex documents. The connection between models and code 
-is fragile, relying on the correctness of translators from for 
-example UML state machines to code. 
+especially embedded programming. UML and SysML also support 
+requirements (as special comments), a concept that usually is not embedded as a first citizen in programming. 
+It would be interesting to see requirements as part of programming.The above observations are rather positive. However, UML and
+SysML are very complex and weakly defined formalisms. 
+For example, the combined syntax for all of UML corresponds 
+to the sum of approximately 20 programming languages (approximately 
+17,000 lines of abstract syntax, a programming language can 
+normally be defined in between 500 and 2500 lines of grammar 
+rules). The UML/SysML standards are long and complex documents. 
+Furthermore, the connection between models and code is fragile, relying on the correctness of translators from for example UML state machines to code. Finally, discussions about semantics
+(what does two boxes with a line in between mean) can turn 
+project meetings into chaos.
 
 
 \subsection{Programming}Several new programming languages have emerged over the last 
-decade, which include abstraction mechanisms known from the formal 
+decades, which include abstraction mechanisms known from the formal 
 specification languages mentioned above. Such languages include 
 Eiffel, Java, Python, Scala, Fortress,  C\#, Spec\#, F\#,  Dafny, D, 
-RUST, Swift, Go, Agda, and SPARK.  Some languages support design-
-by-contract with pre-post conditions, and in some cases with 
+RUST, Swift, Go, Agda, and SPARK.  Some languages support 
+design-by-contract with pre-post conditions, and in some cases with 
 invariants. These languages  include for example Eiffel, Spec\#, 
 Dafny, SPARK, and to some limited extent Scala. Java supports 
 contracts through JML, which, however, is not integrated with Java, 
@@ -116,14 +117,15 @@ but an add-on comment language (JML specifications are comments in
 a Java program). Most of the languages above support abstract 
 collections such as sets, lists and maps. It is interesting to 
 observe that SUN’s Fortress language (which unfortunately was not 
-finished by the designers) supports a mathematical notation for 
-collections very similar to VDM. The Dafny language is interesting 
-since it is developed specifically with specification and 
-verification in mind.A trend on the rise is likely the combination of object oriented 
+finished due to lack of funding) supports a mathematical 
+notation for collections very similar to VDM. The systems 
+Dafny and Why3 are amongst the newest branches of work, 
+interesting since these languages are developed 
+specifically with verification in mind.A trend on the rise is the combination of object-oriented 
 and functional programming, as seen in perhaps most prominently 
 Scala, but also in the earlier Python, and now in Java which got 
 closures in version 1.8.  Ocaml is a similar earlier attempt to 
-integrate object oriented and functional programming, although in a 
+integrate object-oriented and functional programming, although in a 
 layered manner, and not integrated with the standard module system. 
 Some interesting new directions of research include dependent types 
 as found in Agda (to some extent related to predicate subtypes in 
@@ -132,6 +134,5 @@ can be checked at compile time. They are much related to temporal
 logic as used within the formal methods community to express 
 properties of concurrent programs. At the same time there are also 
 attempts to make more conservative moves away from C, but without 
-losing too much efficiency. Examples include the languages D and 
-RUST. However, as stated earlier, C has an impressive staying power, and these attempts have not yet made the highway.
+losing too much efficiency. Examples include the languages Go, D and RUST. However, as stated earlier, C has an impressive staying power, and these attempts have not yet made the highway.
 

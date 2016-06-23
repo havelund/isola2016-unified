@@ -7,23 +7,28 @@ modeling can be perceived as programming. We will do this through
 a small collection of examples, illustrating how what is normally
 considered as modeling can be perceived as programming. We start
 with class diagrams, as found in UML and SysML, then move on to
-a classical formal specification language such as VDM, and finally discuss the issues with domain-specific languages.
+a classical formal specification language such as VDM, and finally discuss DSLs (domain-specific languages).
 
 \subsection{Modeling of Class Diagrams}
 \label{sec:complex-classes-in-scala}
 
 A commonly used part of UML and SysML is the class diagram. The class diagram is a visualization of data structures as nodes and edges. Nodes represent data elements and edges represent the relationships between data elements. To take an
 example, consider the class diagram in Figure \ref{fig:library}
-(the example is adopted from \cite{?}). This diagram models libraries of books. In this diagram a box (node) denotes a type, a set of objects of that type. Hence for example \name{Library} denotes the type of libraries: a set
-of library objects each denoting a library.
-A library (top node) has a name, which is a string. Note that
-such data of primitive types (strings, integers, reals, Booleans, ...) are represented as so-called {\em attributes} and are declared inside the boxes instead of as egdes, although in principle they are just edges to boxes representing primitive types. A library consists of (left arrow) 
-a collection of books (zero or more represented by $0 .. *$),
-reachable from the library via the field \name{books}. In the other direction: a book is related to zero or one ($0 .. 1$) libraries.
+(the example is adopted from \cite{?}). This diagram models libraries of books. In this diagram a box (node) denotes a type, a set of objects of that type. Hence for example \name{Library} 
+(top node) denotes the type of libraries: a set
+of library objects each representing a library.
+A library has a name, which is a string. Note that
+such data of primitive types (strings, integers, reals, Booleans, ...) are represented as so-called {\em attributes} and are declared inside the boxes instead of as edges, although in principle they can be perceived edges to boxes representing primitive types\footnote{This is an example of a discussion
+about semantics that can throw a project meeting off its course.}. 
+A library consists of (left arrow) 
+a collection of books (zero or more represented by 
+the {\em multiplicity} $0 .. *$),
+reachable from a library object via the field \name{books}. In the other direction: a book is related to zero or one ($0 .. 1$) libraries.
 Similarly, a library (right arrow) has associated a collection of
 members. Books and members have names. In addition each book has as
-attribute the number of books on shelf. Finally, a loan is a connection between a book and a member. A library has associated
-a collection of (current) loans.
+attribute the number of books on shelf. Finally, a loan is a 
+connection between a book and a member, and a library has 
+associated a collection of (current) loans.
 
 \begin{figure}[ht]
 \centering
@@ -32,18 +37,29 @@ a collection of (current) loans.
 \label{fig:library}
 \end{figure}
 
+\begin{figure}
+\begin{schema}{Book}
+	name: \seq CHAR \\
+	copies: \num
+\where
+	copies > 0
+\end{schema}
+\caption{Z model of books in a library}
+\label{fig:book-z}
+\end{figure}
+
 In many modeling situations such diagrams form the core of the 
 modeling effort. Constraints can be added to such diagrams.
 For example one constraint could be that the number of copies of a 
 book should be a number bigger than or equal to 1. Such a 
 constraint can be added inside special constraint box on the 
-diagram  in \ref{fig:library}, attached to the \name{Book} box
-with a dotted line. It is interesting to note, that such a ``box''
-with an associated constraint conceptually is very similar to the 
-idea of a Z schema \cite{?}, as shown in Figure \ref{fig:book-z}
-\footnote{Note that the constraint can actually be avoided in Z by 
-defining the type of \name{copies} to be $\mathbb{N}_1$, the 
-natural numbers starting from 1.}.
+diagram  in Figure \ref{fig:library}, attached to the \name{Book} 
+box with a dotted line. It is interesting to note, that a 
+box with an associated constraint (written in another box and linked with a line) conceptually is very similar 
+to the idea of a Z schema \cite{?}, as shown in Figure 
+\ref{fig:book-z}\footnote{Note that the constraint can actually be 
+avoided in Z by  defining the type of \name{copies} to be $
+\mathbb{N}_1$, the natural numbers starting from 1.}.
 This schema represents the fundamental concept of a model: a 
 signature (the declaration of \name{name} and \name{copies} above 
 the line with their types) and then zero or more axioms (below the 
@@ -55,11 +71,11 @@ SysML diagrams. An example is  the K specification language
 The expression language of K as well as Z 
 (what is written in constraints) is predicate 
 logic. Both languages support datatypes such as sets, including 
-advanced set expressions such as set comprehension. K is object-
-oriented and is inspired by languages  such as Z, VDM \cite{?} and 
-RAISE \cite{?}. 
+advanced set expressions such as set comprehension. K is 
+object-oriented and is inspired by Z, as well as by
+other languages, such as VDM \cite{?} and RAISE \cite{?}. 
 
-Another alternative such textual notation is OCLInEcore \cite{?}, 
+Another textual notation coming out of the model-based engineering community itself is OCLInEcore \cite{?}, 
 which is an attempt 
 to define a textual language combining the Ecore model
 of SysML with the OCL constraint language (Object Constraint 
@@ -72,7 +88,7 @@ in contrast to predicate logic. For example OCL does not have
 general universal and existential quantification over infinite 
 sets. In predicate 
 logic we would write a universal quantification over a set/type 
-$S$ as follows: $\forall x : S \bullet P(x)$. In OCL one would 
+$S$ as follows: $\forall x : S \bullet P(x)$, meaning: for all $x$ in the set $S$, $P(x)$ is true. In OCL one would 
 write this as:
 \iocl{S->forAll(x | P(x))}. However, OCL requires $S$ to be 
 finite,
@@ -86,17 +102,6 @@ a model instance.
 %in K as shown in Figure 
 %\ref{fig:book-k}, very similar
 %to the Z specification. 
-
-\begin{figure}
-\begin{schema}{Book}
-	name: \seq CHAR \\
-	copies: \num
-\where
-	copies > 0
-\end{schema}
-\caption{Z model of books in a library}
-\label{fig:book-z}
-\end{figure}
 
 %\begin{figure}
 %\begin{center}
@@ -116,11 +121,21 @@ a model instance.
 %\end{figure}
 
 In order to illustrate OCLInEcore we expand our example by adding 
-the requirement that ``{\em the number of loans that a book is 
-part 
-of should be less than or equal to the 
-number of copies of the book}''. The following OCLInEcore model 
+the following requirement: ``{\em The number of loans that a book 
+is part of should be less than or equal to the 
+number of copies of the book}''. The OCLInEcore model 
 in Figure \ref{fig:book-oclinecore} formalizes this requirement.
+For this purpose, in addition to the two attributes \name{name} and \name{copies}, two {\em properties} are defined. 
+In contrast to an attribute, 
+which has a primitive type, a property is linked to one or 
+more objects of another user-defined 
+type (those drawn as boxes in class diagrams).
+The property \name{library} links a book to the library it is part 
+of, and is the ``{\em opposite property}'' of the \name{books} 
+property of the \name{Library} (expressed using the \iocl{#}-
+notation), meaning that if a book is in the \name{books} set (a 
+bag in fact) of a library, then the library is also in the 
+\name{library} of the book. The `\iocl{?}' represents 0 or 1.
 
 \begin{figure}
 \begin{center}
@@ -146,7 +161,7 @@ class Book {
     copies > 0;
      
   invariant SufficientCopies:
-    library.loans->select(book=self)->size() <= copies;     
+    loans->size() <= copies;     
 }
 \end{lstlisting}
 \end{tabular}
@@ -155,23 +170,9 @@ class Book {
 \label{fig:book-oclinecore}
 \end{figure}
 
-In addition to the two attributes \name{name} and \name{copies},
-two properties and an operation is defined, all of which are used 
-to express the new invariant. In contrast to an {\em attribute}, 
-which has a primitive type, a {\em property} is linked to one or 
-more objects of another user-defined 
-type (those drawn as boxes in class diagrams).
-The property \name{library} links a book to the library it is part 
-of, and is the ``{\em opposite property}'' of the \name{books} 
-property of the \name{Library} (expressed using the \iocl{#}-
-notation), meaning that of a book is in the \name{books} set (a 
-bag in fact) of a library, then the library is also in the 
-\name{library} of the book. The `\iocl{?}' represents 0 or 1.
-
 The property \name{loans} denotes a collection of \name{Loan} 
-objects and is 
-derived (meaning its value depends on other values), with the 
-formula defining 
+objects and is derived (meaning its value depends on other values), 
+with the formula defining 
 its value provided as an OCL expression.
 The expression reads as follows: from this book (referred to as 
 \iocl{self} later in the expression), retrieve the library it is 
@@ -182,12 +183,12 @@ notation \iocl{S->M(...)} means calling the method \iocl{M} on the
 set \iocl{S}. Hence in this case the
 \iocl{select(predicate)} method is defined on sets and returns the 
 subset of elements of the set satisfying the predicate.
-The operation \name{isAvailable} returns a Boolean, and is defined 
-by retrieving the loans as a collection, evaluate its size, and 
-compare to the 
-number of copies available. Finally, the two invariants can be 
-formulated, and their explanation should at this point be straight 
-forward.
+The two invariants can now be formulated, and their explanation should at this point be straight forward.
+The {\em operation} \name{isAvailable} is defined to illustrate that one can also define such, here with a body as an 
+OCL expression. One can also define operations with side-effects specified with pre/post conditions. No code with side-effects is allowed in 
+bodies of operations, which seems to be a limitation, and a sign
+of an attempt to move towards a programming language, but not all
+the way.
 
 The main point we are trying to make here is that the OCLInEcore 
 model, which in reality is very similar to a Z specification 
@@ -195,7 +196,7 @@ model, which in reality is very similar to a Z specification
 expressed in the Scala programming language. This is shown in 
 Figure \ref{fig:book-scala}. The class \iscala{Book} extends the
 class \iscala{Block}, which offers various methods for writing 
-models, including the \iscala{invariant} method uses to define 
+models, including the \iscala{invariant} method used to define 
 invariants. What in the OCLInEcore model was the property 
 \iscala{loans} and the operations \iscala{isAvailable}, are here 
 modeled as methods (using the \iscala{def} keyword). 
@@ -226,7 +227,7 @@ class Book extends Model {
   } 
        
   invariant ("SufficientCopies") {
-    library.loans.filter(_.book eq this).size <= copies
+    loans.size <= copies
   }       
 }
 \end{lstlisting}
@@ -260,8 +261,8 @@ class Book extends Model {
 \end{lstlisting}
 \end{tabular}
 \end{center}
-\label{fig:invariant-scala}
 \caption{Support for defining invariants in Scala}
+\label{fig:invariant-scala}
 \end{figure}
 
 The only code that has to be written to provide support for 
@@ -279,7 +280,7 @@ of which can then be evaluated with a call of \iscala{evaluate}.
 \subsection{VDM Specifications}
 \label{sec:vdm-in-scala}
 
-As another example, we shall consider a a chemical plant alarm 
+As another example, we shall consider a chemical plant alarm 
 management system, first modeled in \vdmpp{} in 
 \cite{vdmplusplus05} and also modeled in Scala in 
 \cite{?}. We show here a slight modification of 
@@ -295,15 +296,15 @@ operational faults discovered in a
 chemical plant. 
 Two operations must be provided.
 \name{ExpertToPage}: Upon detection of a faulty condition, an 
-alarm is raised, and an expert on duty is assigned to
-handle the alarm. Each alarm is associated with a specific 
+alarm is raised, and this operation must find an expert on duty 
+able to handle the alarm. Each alarm is associated with a specific 
 qualification required to fix the causing
 problem, and each expert is associated with a set of 
 qualifications. Upon an alarm, an expert must be found, and paged, 
 that is on duty during the corresponding period and with the right 
 qualification.    
-\name{ExpertIsOnDuty}: return the periods on which an expert is on 
-duty.      
+\name{ExpertIsOnDuty}: returns the periods during 
+which an expert is on duty.      
 In addition, the state of the system must satisfy the following
 {\em invariant}:
 (i) There must be experts on duty during all periods 
@@ -318,7 +319,7 @@ is part of the model of this system (other classes/types shown in
 \name{Alarm}, \name{Period}, and \name{Expert}).
 The body of this class is divided into three sections: {\em 
 instance variables} (mutable variables), {\em functions} (with no 
-side-effects) and {\em operations} (with side-effects). An 
+side-effects), and {\em operations} (with side-effects). An 
 invariant defined by the function \name{PlantInv} is imposed on 
 the instance variables. We shall not go into the further details
 but just refer to the corresponding Scala program modeling the 
@@ -364,7 +365,7 @@ end Plant
 \end{lstlisting}
 \end{tabular}
 \end{center}
-\caption{VDM++ model of plant}
+\caption{\vdmpp{} model of plant}
 \label{fig:plant-vdm}
 \end{figure}
 
@@ -410,7 +411,7 @@ trait Plant extends Model {
 \label{fig:plant-scala}
 \end{figure}
 
-\subsection{Domain Specific Languages}
+\subsection{Domain-Specific Languages}
 \label{sec:dsl-in-scala}
 
 We consider the ability to define domain-specific languages (DSLs) an 
@@ -419,10 +420,10 @@ within the UML/SysML community through meta-modeling and profiles, and forms
 a important part of the activities of that community. Programming languages have been
 slower to pick up this concept, although an early language such as LISP supported macros
 from its birth. A modern programming language such as Scala supports definition of
-so-called {\em internal DSLs} with a collection of a few but convenient 
-language features. In this section we shall illustrate this with an example
+so-called {\em internal} DSLs with a collection of a few 
+elegant language features. In this section we shall illustrate this with an example
 DSL for monitoring event sequences. The example was also listed in \cite{?}.
-An internal DSL is an extension of the programming language, in this case 
+An {\em internal} DSL is an extension of the programming language, in this case 
 effectively an API, however, expressed in such a way that use of this API
 has the flavor of new syntax added to the language.
 
@@ -430,11 +431,12 @@ has the flavor of new syntax added to the language.
 \begin{center}
 \begin{tabular}{c}
 \begin{lstlisting}[language=scala]
-class LockOrder extends Monitor { 
-  "acquire" -- 'acquire('t, 'l) |-> insert('Locked('t, 'l))
-  "release" -- 'Locked('t, 'l) & 'release('t, 'l) |-> remove('Locked)
-  "edge"    -- 'Locked('t, 'l1) & 'acquire('t, 'l2) |-> insert('Edge('l1, 'l2))
-  "cycle"   -- 'Edge('l1, 'l2) & 'Edge('l2, 'l1) |-> fail() 
+class NoLockCycles extends Monitor {
+  "r1" -- 'lock('t,'l) |-> 'Locked('t,'l)
+  "r2" -- 'Locked('t,'l) & 'unlock('t,'l) |-> remove('Locked)
+  "r3" -- 'Locked('t,'l1) & 'lock('t,'l2) |-> 'Edge('l1,'l2)
+  "r4" -- 'Edge('l1,'l2) & 'Edge('l2,'l3) & not('Edge('l1,'l3)) |-> 'Edge('l1,'l3)
+  "r5" -- 'Edge('l1,'l2) |-> {if (get('l1) == get('l2)) fail()}
 }
 \end{lstlisting}
 \end{tabular}
@@ -444,31 +446,38 @@ class LockOrder extends Monitor {
 \end{figure}
 
 The DSL illustrated here is LogFire \cite{havelund-logfire-sttt14},
-created for writing trace properties. We shall not go into details
-of LogFore (the reader is referred to \cite{havelund-logfire-sttt14}),
-but only show a model written in this DSL, and briefly explain how the
-DSL is defined. LogFire is a DSL for rule-based programming. A monitor is specified as 
-a set of rules, each of the form: 
+created for rule-based programming, and specifically for 
+writing temporal trace properties. We shall not go into the details of LogFire (the reader is referred to \cite{havelund-logfire-sttt14}), but only show a model written in this DSL, 
+and briefly explain how the DSL is defined. 
+A monitor is specified as a set of rules, each of the form: 
 
 \[
   \textit{name}\ \verb+--+\ \textit{condition}_1\ \& \ldots \&\ \textit{condition}_n\ \longmapsto\  \textit{action}
 \]
 
 \noindent
-A rule consists of a left-hand side: a list of conditions, and a right-hand side:
-an action. The rules operate on a set of facts, the fact memory (efficiently implemented) 
-where conditions check the presence or absence of certain facts, and the action adds or deletes 
-facts, or execute any Scala code inserted as an action. Figure \ref{fig:deadlocks-scala} illustrates 
-a monitor which monitors $acquire(thread,lock)$ and $release(thread,lock)$ events,
-and attempts to determine if there is any two threads that access locks
-in a cyclic manner, which can lead to deadlocks (this is the dining philosopher problem). 
-A cycle is detected if for any two locks $l_1$ and $l_2$ there is an edge from
-$l_1$ to $l_2$ and from $l_2$ to $l_1$.
+A rule consists of a left-hand side: a list of conditions, and a 
+right-hand side:
+an action. The rules operate on a set of facts, the 
+{\em fact memory} (efficiently implemented) 
+where conditions check the presence or absence of certain facts, 
+and the action adds or deletes 
+facts, or execute any Scala code inserted as an action. Figure 
+\ref{fig:deadlocks-scala} illustrates 
+a monitor, which monitors $acquire(thread,lock)$ and 
+$release(thread,lock)$ events emitted from an instrumented 
+multi-threaded application, that uses locks to protect against
+data races. The monitor attempts to determine whether any 
+group of threads access locks
+in a cyclic manner, which can lead to deadlocks (the classical
+dining philosopher problem). 
+A cycle is detected if for any lock $l$ there is 
+an edge from $l$ back to itself.
 
-The class contains four rules. Beyond the monitored events
+The class contains five rules. Beyond the monitored events
 \iscala{acquire} and \iscala{release}, the monitor adds 
 and deletes \iscala{Locked(thread,lock)} facts (the thread holds
-the lock), and adds \iscala{Edge(lock1,lock)} facts, representing
+the lock), and adds \iscala{Edge(lock1,lock2)} facts, representing
 that there is an edge from \iscala{lock1} to \iscala{lock2}.
 The class extends the \iscala{Monitor} class which contains the
 DSL definitions that allows us to write rules in this manner.

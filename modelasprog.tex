@@ -15,7 +15,7 @@ a classical formal specification language such as VDM, and finally discuss DSLs 
 A commonly used part of UML and SysML is the class diagram. The class diagram is a visualization of data structures as nodes and edges. Nodes represent data elements and edges represent the relationships between data elements. To take an
 example, consider the class diagram in Figure \ref{fig:library}
 (the example is adopted from \cite{?}). This diagram models libraries of books. In this diagram a box (node) denotes a type, a set of objects of that type. Hence for example \name{Library} 
-(top node) denotes the type of libraries: a set
+(top node, references to models are enclosed in \name{...}) denotes the type of libraries: a set
 of library objects each representing a library.
 A library has a name, which is a string. Note that
 such data of primitive types (strings, integers, reals, Booleans, ...) are represented as so-called {\em attributes} and are declared inside the boxes instead of as edges, although in principle they can be perceived edges to boxes representing primitive types\footnote{This is an example of a discussion
@@ -58,10 +58,10 @@ box with a dotted line. It is interesting to note, that a
 box with an associated constraint (written in another box and linked with a line) conceptually is very similar 
 to the idea of a Z schema \cite{?}, as shown in Figure 
 \ref{fig:book-z}\footnote{Note that the constraint can actually be 
-avoided in Z by  defining the type of \name{copies} to be $
+avoided in Z by  defining the type of \izlang{copies} to be $
 \mathbb{N}_1$, the natural numbers starting from 1.}.
 This schema represents the fundamental concept of a model: a 
-signature (the declaration of \name{name} and \name{copies} above 
+signature (the declaration of \izlang{name} and \izlang{copies} above 
 the line with their types) and then zero or more axioms (below the 
 line). 
 %
@@ -125,17 +125,17 @@ the following requirement: ``{\em The number of loans that a book
 is part of should be less than or equal to the 
 number of copies of the book}''. The OCLInEcore model 
 in Figure \ref{fig:book-oclinecore} formalizes this requirement.
-For this purpose, in addition to the two attributes \name{name} and \name{copies}, two {\em properties} are defined. 
+For this purpose, in addition to the two attributes \iocl{name} and \iocl{copies}, two {\em properties} are defined. 
 In contrast to an attribute, 
 which has a primitive type, a property is linked to one or 
 more objects of another user-defined 
 type (those drawn as boxes in class diagrams).
-The property \name{library} links a book to the library it is part 
-of, and is the ``{\em opposite property}'' of the \name{books} 
-property of the \name{Library} (expressed using the \iocl{#}-
-notation), meaning that if a book is in the \name{books} set (a 
+The property \iocl{library} links a book to the library it is part 
+of, and is the ``{\em opposite property}'' of the \iocl{books} 
+property of the \iocl{Library} (expressed using the \iocl{#}-
+notation), meaning that if a book is in the \iocl{books} set (a 
 bag in fact) of a library, then the library is also in the 
-\name{library} of the book. The `\iocl{?}' represents 0 or 1.
+\iocl{library} of the book. The `\iocl{?}' represents 0 or 1.
 
 \begin{figure}
 %\begin{center}
@@ -170,7 +170,7 @@ class Book {
 \label{fig:book-oclinecore}
 \end{figure}
 
-The property \name{loans} denotes a collection of \name{Loan} 
+The property \iocl{loans} denotes a collection of \iocl{Loan} 
 objects and is derived (meaning its value depends on other values), 
 with the formula defining 
 its value provided as an OCL expression.
@@ -184,7 +184,7 @@ set \iocl{S}. Hence in this case the
 \iocl{select(predicate)} method is defined on sets and returns the 
 subset of elements of the set satisfying the predicate.
 The two invariants can now be formulated, and their explanation should at this point be straight forward.
-The {\em operation} \name{isAvailable} is defined to illustrate that one can also define such, here with a body as an 
+The {\em operation} \iocl{isAvailable} is defined to illustrate that one can also define such, here with a body as an 
 OCL expression. One can also define operations with side-effects specified with pre/post conditions. No code with side-effects is allowed in 
 bodies of operations, which seems to be a limitation, and a sign
 of an attempt to move towards a programming language, but not all
@@ -293,7 +293,7 @@ The system shall manage the calling out of experts to deal with
 operational faults discovered in a 
 chemical plant. 
 Two operations must be provided.
-\name{ExpertToPage}: Upon detection of a faulty condition, an 
+\ivdm{ExpertToPage}: Upon detection of a faulty condition, an 
 alarm is raised, and this operation must find an expert on duty 
 able to handle the alarm. Each alarm is associated with a specific 
 qualification required to fix the causing
@@ -301,7 +301,7 @@ problem, and each expert is associated with a set of
 qualifications. Upon an alarm, an expert must be found, and paged, 
 that is on duty during the corresponding period and with the right 
 qualification.    
-\name{ExpertIsOnDuty}: returns the periods during 
+\ivdm{ExpertIsOnDuty}: returns the periods during 
 which an expert is on duty.      
 In addition, the state of the system must satisfy the following
 {\em invariant}:
@@ -311,14 +311,14 @@ allocated in the system.
 expert assigned to that period that has the qualification required
 to fix the source problem of the alarm.
 
-The \vdmpp{} class \name{Plant} in Figure \ref{fig:plant-vdm} 
+The \vdmpp{} class \ivdm{Plant} in Figure \ref{fig:plant-vdm} 
 is part of the model of this system (other classes/types shown in
 \cite{vdmplusplus05} have been left out here: 
-\name{Alarm}, \name{Period}, and \name{Expert}).
+\ivdm{Alarm}, \ivdm{Period}, and \ivdm{Expert}).
 The body of this class is divided into three sections: {\em 
 instance variables} (mutable variables), {\em functions} (with no 
 side-effects), and {\em operations} (with side-effects). An 
-invariant defined by the function \name{PlantInv} is imposed on 
+invariant defined by the function \ivdm{PlantInv} is imposed on 
 the instance variables. We shall not go into the further details
 but just refer to the corresponding Scala program modeling the 
 plant in Figure \ref{fig:plant-scala}.

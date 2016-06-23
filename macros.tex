@@ -11,8 +11,6 @@
 \usepackage{color}
 \definecolor{light-gray}{gray}{0.95}
 
-\newcommand{\name}[1]{\texttt{#1}}
-
 \newcommand{\ignore}[1]{}
 
 \newcommand{\GR}[1]{\notethis{ForestGreen}{Giles}{#1}}
@@ -176,17 +174,30 @@ morekeywords={class,invariant,self,attribute,property,derived,derivation,operati
   moredelim=[is][\em]{@}{@}
 }
 
-\newcommand{\scala}{\lstset{language=scala,backgroundcolor=\color{white}, frame=none,basicstyle={\small}}}
-\newcommand{\iscala}{\scala\lstinline} % inline scala
+%\newcommand{\enclose}[1]{`#1'}
+%\newcommand{\enclose}[1]{$\langle$#1$\rangle$}
+%\newcommand{\enclose}[1]{[#1]}
+%\newcommand{\enclose}[1]{$\mid$#1$\mid$}
+%\newcommand{\enclose}[1]{$\lceil$#1$\rceil$}
+\newcommand{\enclose}[1]{$\lfloor$#1$\rfloor$}
 
-\newcommand{\scalaimpl}{\lstset{language=scala,backgroundcolor=\color{white}, frame=none,basicstyle={\small}}}
+\newcommand{\name}[1]{\enclose{#1}}
+
+\newcommand{\scala}{\lstset{language=scala,backgroundcolor=\color{white}, frame=none,basicstyle={\small}}}
+%\newcommand{\iscala}{\scala\lstinline} % inline scala
+\newcommand{\iscala}[1]{\enclose{\scala\lstinline{#1}}}
 
 \newcommand{\oclinecore}{\lstset{language=oclinecore,backgroundcolor=\color{white}, frame=none,basicstyle={\small}}}
-\newcommand{\iocl}{\oclinecore\lstinline} % inline ocl
+%\newcommand{\iocl}{\oclinecore\lstinline} % inline ocl
+\newcommand{\iocl}[1]{\enclose{\oclinecore\lstinline{#1}}}
 
 \newcommand{\zlang}{\lstset{language=zlang,backgroundcolor=\color{white}, frame=none,basicstyle={\small}}}
+\newcommand{\izlang}[1]{\enclose{\zlang\lstinline{#1}}}
 
 \newcommand{\klang}{\lstset{language=klang,backgroundcolor=\color{white}, frame=none,basicstyle={\small}}}
+
+\newcommand{\vdm}{\lstset{language=vdm,backgroundcolor=\color{white}, frame=none,basicstyle={\small}}}
+\newcommand{\ivdm}[1]{\enclose{\vdm\lstinline{#1}}}
 
 % -------
 % Themes:

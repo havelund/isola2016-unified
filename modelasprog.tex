@@ -14,7 +14,7 @@ a classical formal specification language such as VDM, and finally discuss DSLs 
 
 A commonly used part of UML and SysML is the class diagram. The class diagram is a visualization of data structures as nodes and edges. Nodes represent data elements and edges represent the relationships between data elements. To take an
 example, consider the class diagram in Figure \ref{fig:library}
-(the example is adopted from \cite{?}). This diagram models libraries of books. In this diagram a box (node) denotes a type, a set of objects of that type. Hence for example \name{Library} 
+(the example is adopted from \cite{oclinecoreTutorial}). This diagram models libraries of books. In this diagram a box (node) denotes a type, a set of objects of that type. Hence for example \name{Library} 
 (top node, references to models are enclosed in \name{...}) denotes the type of libraries: a set
 of library objects each representing a library.
 A library has a name, which is a string. Note that
@@ -33,7 +33,7 @@ associated a collection of (current) loans.
 \begin{figure}[ht]
 \centering
 \includegraphics[width=0.9\textwidth]{images/library.png}
-\caption{The book library (from \cite{?})}
+\caption{The book library (from \cite{oclinecoreTutorial})}
 \label{fig:library}
 \end{figure}
 
@@ -56,7 +56,7 @@ constraint can be added inside special constraint box on the
 diagram  in Figure \ref{fig:library}, attached to the \name{Book} 
 box with a dotted line. It is interesting to note, that a 
 box with an associated constraint (written in another box and linked with a line) conceptually is very similar 
-to the idea of a Z schema \cite{?}, as shown in Figure 
+to the idea of a Z schema \cite{Spivey-Z-92}, as shown in Figure 
 \ref{fig:book-z}\footnote{Note that the constraint can actually be 
 avoided in Z by  defining the type of \izlang{copies} to be $
 \mathbb{N}_1$, the natural numbers starting from 1.}.
@@ -67,7 +67,7 @@ line).
 %
 Attempts have been made to provide textual versions of UML and 
 SysML diagrams. An example is  the K specification language 
-\cite{?}, that was developed at JPL. 
+\cite{havelund-k-modelsward-2016}, that was developed at JPL. 
 The expression language of K as well as Z 
 (what is written in constraints) is predicate 
 logic. Both languages support datatypes such as sets, including 
@@ -75,7 +75,7 @@ advanced set expressions such as set comprehension. K is
 object-oriented and is inspired by Z, as well as by
 other languages, such as VDM \cite{?} and RAISE \cite{?}. 
 
-Another textual notation coming out of the model-based engineering community itself is OCLInEcore \cite{?}, 
+Another textual notation coming out of the model-based engineering community itself is OCLInEcore \cite{oclinecore}, 
 which is an attempt 
 to define a textual language combining the Ecore model
 of SysML with the OCL constraint language (Object Constraint 
@@ -166,7 +166,7 @@ class Book {
 \end{lstlisting}
 %\end{tabular}
 %\end{center}
-\caption{OCLInEcore model of books in a library (from \cite{?}, modified)}
+\caption{OCLInEcore model of books in a library (from \cite{oclinecoreTutorial}, modified)}
 \label{fig:book-oclinecore}
 \end{figure}
 

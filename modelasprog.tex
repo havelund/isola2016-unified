@@ -73,14 +73,14 @@ The expression language of K as well as Z
 logic. Both languages support datatypes such as sets, including 
 advanced set expressions such as set comprehension. K is 
 object-oriented and is inspired by Z, as well as by
-other languages, such as VDM \cite{?} and RAISE \cite{?}. 
+other languages, such as VDM \cite{vdm78,bjoerner-jones-82,jones90,jones-shaw-90,vdmplusplus05} and RAISE \cite{raise92,george-raise-2008,havelund-losl-08}. 
 
 Another textual notation coming out of the model-based engineering community itself is OCLInEcore \cite{oclinecore}, 
 which is an attempt 
 to define a textual language combining the Ecore model
 of SysML with the OCL constraint language (Object Constraint 
 Language) 
-\cite{?}. OCL is a declarative expression language that is now 
+\cite{ocl}. OCL is a declarative expression language that is now 
 part of the UML 
 standard. OCL descended from Z, but is based on chained method 
 calls read from left to right, starting from finite collections, 
@@ -281,7 +281,7 @@ with a call of \iscala{verify}. Note that such invariants
 As another example, we shall consider a chemical plant alarm 
 management system, first modeled in \vdmpp{} in 
 \cite{vdmplusplus05} and also modeled in Scala in 
-\cite{?}. We show here a slight modification of 
+\cite{havelund-scala-vdm-12}, which goes into further detail comparing \vdmpp{} and Scala. We show here a slight modification of 
 the \vdmpp{} specification as well as the 
 corresponding Scala program. In \cite{vdmplusplus05}
 the example specification was associated with 
@@ -423,8 +423,8 @@ supports definition of
 so-called {\em internal} DSLs with a collection of a few 
 elegant language features. In this section we shall illustrate this 
 with an example
-DSL for monitoring event sequences. The example was also listed in 
-\cite{?}.
+DSL for monitoring event sequences. 
+The example was also listed in \cite{havelund-joshi-experience-2014}.
 An {\em internal} DSL is an extension of the programming language, 
 in this case 
 effectively an API, however, expressed in such a way that use of 
@@ -463,7 +463,7 @@ A monitor is specified as a set of rules, each of the form:
 A rule consists of a left-hand side: a list of conditions, and a 
 right-hand side:
 an action. The rules operate on a set of facts, the 
-{\em fact memory} (implemented as a RETE network \cite{?}) 
+{\em fact memory} (implemented as a RETE network \cite{forgy-rete-82}) 
 where conditions check the presence or absence of certain facts, 
 and the action adds or deletes 
 facts, or execute any Scala code inserted as an action. Figure 

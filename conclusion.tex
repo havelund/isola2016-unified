@@ -32,8 +32,9 @@ modeling and programming.
 
 We can observe three major domains of interest, namely modeling; 
 programming of non-embedded systems, such as web applications, 
-including scripting; and finally programming of embedded/cyber-
-physical systems. It is clear that these three domains till date 
+including scripting; and finally programming of 
+embedded and cyber-physical systems. It is clear that these three 
+domains till date 
 have been addressed by different communities and different 
 languages. The question is to what extent these
 quite different domains could be targeted with the same formalism.
@@ -103,13 +104,21 @@ targeting specific execution platforms
 
 \paragraph{Continuous mathematics:}
 
-A formalism must support modeling of cyber-physical systems. That
+A formalism can support modeling of cyber-physical systems. That
 is: physical systems controlled by computer programs. To model (not program) a cyber-physical system, there is a need for describing
 continuous behavior using continuous mathematics, including
 for example differential equations, as supported by for example
 Modelica \cite{Elmqvist-Modelica-2009,modelica-standard}
 and Mathematica \cite{mathematica}. 
-Modelica is an object-oriented language for modeling systems containing mechanical, electrical, electronic, hydraulic, thermal, control, electric power or process-oriented subcomponents. Models can be simulated. Mathematica is a more broadly scoped symbolic mathematical computation program.
+Modelica is an object-oriented language for modeling systems 
+containing mechanical, electrical, electronic, hydraulic, thermal, 
+control, electric power or process-oriented subcomponents. Models 
+can be simulated. Mathematica is a more broadly scoped symbolic 
+mathematical computation program. A closely related 
+continuous mathematics topic is real-time analysis, as for example 
+performed by real-time model checkers such as UPPAAL 
+\cite{uppaal-larsen-1997}. Whether continuous mathematics should be
+part of a programming solution is a controversial topic.
 
 
 \paragraph{Domain-specific languages:}
@@ -168,7 +177,7 @@ this is simple: specifications/programs are represented as
 text, exactly as typed in by a user. Any tools such as analyzers 
 and compilers read in the text and produce results. The 
 specification language or programming language is defined by a 
-grammar which succinctly defines what is the language of syntax 
+grammar, which succinctly formalizes what is the language of syntax 
 correct texts. In the case of a compiler it produces binary 
 code/byte code, which of course can be stored and used by other 
 programs. However, at the 
@@ -191,7 +200,7 @@ programming community where data usually are separated from
 programs. That is, from within a program one can usually not get
 access to the entire AST of the program itself, although often 
 limited forms of reflection are possible. These different views
-of representations is worthwhile investigating.
+of representations are worthwhile investigating.
 
 \subsubsection{Conclusion}
 We have in this paper outlined some views on the potential in 

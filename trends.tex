@@ -16,17 +16,20 @@ assertions, such as pre- and post-conditions, and invariants,
 correct by construction development (refinement), and giving 
 semantics to programming languages. These ideas were subsequently the basis for several, what we could 
 call, second generation formal specification languages such as 
-VDM, Z, CIP, TLA, and RAISE, to mention just a few of the earlier ones. Each of these languages were full 
-specification languages, with rich type systems and detailed rules 
+VDM, Z, B, CIP, TLA, RAISE, and OBJ, to mention just a few. 
+Each of these languages were full 
+specification languages, most with rich type systems and detailed rules 
 (grammars) for what constitutes a valid specification. These 
 languages were ahead of their time wrt. language features in the 
 sense that many of these features have found their 
 way into modern programming languages of today. A particular
-example of this is collections (sets, lists, and maps).The VDM language for example was a wide-spectrum specification 
+example of this is collections (sets, lists, and maps).The VDM language for example is a wide-spectrum specification 
 language offering a combination of high-level specification 
-constructs and low level programming constructs. The methodology 
+constructs and low level programming like constructs. The 
+methodology 
 consists in part, as in CIP, of refining a high-level specification 
-into a program in a stepwise manner. The language offered concepts 
+into a low-level program like specification in a stepwise manner. 
+The language offered concepts 
 such as the combination of imperative (procedural and later 
 object-oriented in \vdmpp) and functional programming; exceptions; 
 algebraic data types and pattern matching; functions as values and 
@@ -37,11 +40,8 @@ through pre- and post conditions and invariants; predicate subtypes
 (so one for example can define natural numbers as a subset of the 
 integers);  and predicate logic including universal and existential 
 quantification over any type as Boolean expressions.  VDM and Z are 
-so-called model-oriented specification languages, meaning that a 
-specification is an example model of the desired system. This means 
-that such specifications are somewhat close to high-level programs. 
-This is in contrast to so-called property oriented specification 
-languages, such as OBJ, where a specification denotes a set of models.  A different branch of formal methods include theorem proving and 
+so-called {\em model oriented} specification languages, 
+meaning that a specification is an example model of the desired system. This means that such specifications are somewhat close to high-level programs. This is in contrast to so-called {\em property oriented} (algebraic) specification languages, such as OBJ, where a specification denotes a set of models\footnote{This characteristic of the difference is somewhat simplified since a VDM specification in fact also can denote more than one model.}.  A different branch of formal methods includes theorem proving and 
 model checking. In theorem proving we have seen specification 
 languages, which resemble functional programming languages, 
 including for example ACL, PVS and Coq. In model checking, early 
@@ -59,7 +59,7 @@ language like notations, and vice versa. However, the two classes of languages h
 strictly separate categories. VDM for example was always, and still 
 is, considered a specification language, albeit with code 
 generation capabilities. It has never, in spite of the possibility, 
-been considered (named) a programming language, which one may 
+been named a programming language, which one may 
 consider being as one of the reasons it is not more wide spread. 
 Writing specifications in VDM and generating code in Java, for 
 example, has not become popular. Programmers feel uncomfortable 
@@ -78,36 +78,36 @@ to work with graphical notations, such as
 class diagrams and state machines, than they are working with sets, 
 lists and maps and function definitions. It seems clearly more 
 accepted than formal methods as described in the previous section. 
-At JPL for example, there are three people working with formal 
-methods and over hundred working with UML/SysML technology. One of the important notations in UML/SysML is class diagrams. 
+%At JPL for example, there are three people working with formal 
+%methods and over hundred working with UML/SysML technology. One of the important notations in UML/SysML is class diagrams. 
 Class diagrams are, just like E/R-diagrams, really a simple way 
 of defining data, an alternative to working with sets, lists and 
 maps as found in VDM and modern programming languages. For example, 
 to state that a person can own zero or more cars one draws a box 
-for Person and a box for Car and draws a line between them. It is 
-an idea that quickly be picked up by a systems engineer, quicker 
-than learning to program with sets. 
+for Person, and a box for Car, and draws a line between them. It is 
+an idea that quickly can be picked up by a systems engineer, 
+quicker than learning to use programming language data structures. 
 Another notation is that of state 
-machines, a concept that strangely enough has not found its way 
+machines, a concept that interestingly enough has not found its way 
 into programming languages, in spite of its usefulness in 
 especially embedded programming. UML and SysML also support 
 requirements (as special comments), a concept that usually is not embedded as a first citizen in programming. 
-It would be interesting to see requirements as part of programming.The above observations are rather positive. However, UML and
+%It would be interesting to see requirements as part of programming.The above observations are rather positive. However, UML and
 SysML are very complex and weakly defined formalisms. 
 For example, the combined syntax for all of UML corresponds 
 to the sum of approximately 20 programming languages (approximately 
 17,000 lines of abstract syntax, a programming language can 
 normally be defined in between 500 and 2500 lines of grammar 
 rules). The UML/SysML standards are long and complex documents. 
-Furthermore, the connection between models and code is fragile, relying on the correctness of translators from for example UML state machines to code. Finally, discussions about semantics
-(what does two boxes with a line in between mean) can turn 
-project meetings into chaos.
+Furthermore, the connection between models and code is fragile, relying on the correctness of translators from for example UML state machines to code. Finally, a discussion about semantics
+(what do two boxes with a line in between mean?) can turn 
+a project meeting into chaos.
 
 
 \subsection{Programming}Several new programming languages have emerged over the last 
 decades, which include abstraction mechanisms known from the formal 
 specification languages mentioned above. Such languages include 
-Eiffel, Java, Python, Scala, Fortress,  C\#, Spec\#, F\#,  Dafny, D, 
+Eiffel, Java, Python, Scala, Julia, Fortress,  C\#, Spec\#, F\#,  Dafny, D, 
 RUST, Swift, Go, Agda, and SPARK.  Some languages support 
 design-by-contract with pre-post conditions, and in some cases with 
 invariants. These languages  include for example Eiffel, Spec\#, 
@@ -127,6 +127,8 @@ Scala, but also in the earlier Python, and now in Java which got
 closures in version 1.8.  Ocaml is a similar earlier attempt to 
 integrate object-oriented and functional programming, although in a 
 layered manner, and not integrated with the standard module system. 
+As in many other aspects, Lisp was early out
+with this combination with the Common Lisp Object System (CLOS).
 Some interesting new directions of research include dependent types 
 as found in Agda (to some extent related to predicate subtypes in 
 VDM) and session types. Session types are temporal patterns that 

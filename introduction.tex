@@ -7,24 +7,24 @@ associated methodologies, and tools. Their purpose is to
 support modeling of requirements and high-level designs before 
 programming is initiated. Agile approaches advocate to avoid 
 explicit modeling entirely and suggest to go directly to coding. 
-Other approaches advocate avoiding manual “coding” in a programming 
+Other approaches advocate avoiding manual ``coding'' in a 
+programming 
 language entirely and suggest instead the generation of code 
 directly from the models. This way modeling languages replace 
-programming languages.  We can divide these modeling languages into 
+programming languages.  We can divide modeling languages into 
 formal specification languages (formal methods), usually focusing 
 on textual languages based on mathematical logic and set theory, 
 and associated proof tools (theorem provers, model checkers, etc.), 
 and on the other hand model-based engineering languages (UML, 
-SysML, Modelica, Mathematica, …), focusing more on design, code 
+SysML, Modelica, Mathematica, ...), focusing more on design, code 
 generation and simulation. Many of these modeling languages have 
 similarities with programming languages.In parallel, and frankly seemingly independent, we have seen the 
 development of numerous new programming languages. Few languages 
 have had the success of C, which still today is the main 
 programming language for embedded systems. The success is so 
 outstanding that nearly no progress wrt. praxis has been made in 
-this domain (embedded programming) since the 1970ties.  In 
-application programming a collection of new languages came ago such 
-as Ada, C++, Eiffel etc. At the same time we have seen several 
+this domain (embedded programming) since the 1970ties, although some richer languages appeared soon after C in this domain, such as 
+C++, Ada, and Eiffel. All of these have module systems, for example, which C does not. At the same time we have seen several 
 high-level languages appear targeting the softer side of software 
 engineering (such as web-programming, user interfaces, scripting), 
 including languages such as Java, JavaScript, Ruby, Python and 
@@ -34,7 +34,11 @@ including OCaml.
 In this paper we attempt to argue for a unified view of modeling
 and programming. This view can in the extreme be considered a call
 for a single universal formalism for modeling and programming any
-form of system. However, we fully understand that this is not likely
+form of system. This is done by high-lighting some trends in 
+modeling and programming, and by programming some example
+models in the Scala programming language, a high-level formalism
+suited for this purpose.
+However, we fully understand that this is not likely
 to happen. What we intend is to fuel an {\em effort} to at least consider
 merging efforts to the extent feasible. We believe that the model-based
 engineering community can learn from the formal methods and 

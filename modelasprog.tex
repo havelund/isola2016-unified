@@ -309,7 +309,8 @@ that is on duty during the corresponding period and with the right
 qualification.    
 \ivdm{ExpertIsOnDuty}: returns the periods during 
 which an expert is on duty.      
-In addition, the state of the system must satisfy the following
+In addition to providing these two operations, the state of the 
+system must satisfy the following
 {\em invariant}:
 (i) There must be experts on duty during all periods 
 allocated in the system. 
@@ -325,9 +326,9 @@ The body of this class is divided into three sections: {\em
 instance variables} (mutable variables), {\em functions} (with no 
 side-effects), and {\em operations} (with side-effects). An 
 invariant defined by the function \ivdm{PlantInv} is imposed on 
-the instance variables. We shall not go into the further details
-but just refer to the corresponding Scala program modeling the 
-plant in Figure \ref{fig:plant-scala}.
+the instance variables. The corresponding Scala program modeling the plant is shown in Figure \ref{fig:plant-scala}. We shall not go into the further details, except for mentioning the use of the
+\ivdm{suchthat} method, defined in the \ivdm{Model} class, 
+which from a finite set selects an element satisfying a predicate provided as argument.
 
 \begin{figure}
 %\begin{center}
@@ -451,11 +452,12 @@ class NoLockCycles extends Monitor {
 \end{lstlisting}
 %\end{tabular}
 %\end{center}
-\caption{Scala program monitoring lock operations}
+\caption{Scala program written in the rule DSL, 
+monitoring lock operations}
 \label{fig:deadlocks-scala}
 \end{figure}
 
-The DSL illustrated here is LogFire \cite{havelund-logfire-sttt14},
+The DSL illustrated here is the LogFire \cite{havelund-logfire-sttt14},
 created for rule-based programming, and specifically for 
 writing temporal trace properties. We shall not go into the details of LogFire (the reader is referred to \cite{havelund-logfire-sttt14}), but only show a model written in this DSL, 
 and briefly explain how the DSL is defined. 
@@ -488,26 +490,25 @@ The class contains five rules. Beyond the monitored events
 and deletes \iscala{Locked(thread,lock)} facts (the thread holds
 the lock), and adds \iscala{Edge(lock1,lock2)} facts, representing
 that there is an edge from \iscala{lock1} to \iscala{lock2}, indicating that a thread holds  \iscala{lock1} while acquiring
-\iscala{lock2}. The class extends the \iscala{Monitor} class which contains the DSL definitions that allows us to write rules in this manner. Specifically the functions: \iscala{--}, \iscala{&}, \iscala{|->}, \iscala{remove}, and \iscala{fail}. 
+\iscala{lock2}. The class extends the \iscala{Monitor} class which contains the DSL definitions that allow us to write rules in this manner. Specifically the functions: \iscala{--}, \iscala{&}, \iscala{|->}, \iscala{remove}, and \iscala{fail}. 
 
-The implementation of this DSL relies on (1) Scala's
+The implementation of this DSL relies on Scala's (1) 
 allowance for methods having symbol names, such as \iscala{--}
 and \iscala{|->}, (2) allowance for method calls of the form 
-`\iscala{obj.method(arg)}' to be written 
-`\iscala{obj method arg}', and (3) automated insertion by 
-the compiler of 
-user-defined implicit functions that can lift values of one type 
+\iscala{obj.method(arg)} to be written as 
+\iscala{obj method arg}, and (3) automated insertion (by 
+the compiler) of 
+user-defined {\em implicit} 
+functions that can lift a value of one type 
 to a value of another type in places where the compiler's type 
 checker fails to type check an expression. For example part of
 the DSL implementation are the definitions shown in Figure
 \ref{fig:dsl-scala}.
-The implicit function \iscala{liftRuleName} lifts a string (a
-rule name) to an anonymous object. That object defines the 
-\iscala{&} operator as well as the
-\iscala{|->} operator. The implicit function \iscala{liftRuleName} 
+The implicit function \iscala{liftRuleName} 
 gets invoked by the compiler automatically when a string is 
-followed by the symbol \iscala{--}, which does not
-type check (without this implicit function in scope).
+followed by the symbol \iscala{--}. It lifts the string (rule name) to an anonymous object, which provides the method \iscala{--}, which when applied to a condition returns
+an \iscala{RuleDef} object, which provides the methods \iscala{&}
+and \iscala{|->}. This way method calls can be chained together.
 
 \begin{figure}
 \begin{center}

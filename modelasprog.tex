@@ -5,17 +5,18 @@
 In this section we shall attempt to explore the argument that
 modeling can be perceived as programming. We will do this through
 a small collection of examples, illustrating how what is normally
-considered as modeling can be perceived as programming. We start
-with class diagrams, as found in UML and SysML, then move on to
-a classical formal specification language such as VDM, and finally discuss DSLs (domain-specific languages).
+considered as modeling can be perceived as programming. 
+Models are encoded in the Scala programming language, which is
+sufficiently high-level to illustrate the point.
+We start with class diagrams, as found in UML and SysML, then move on to a classical formal specification language such as \vdmpp{}, and finally discuss DSLs (domain-specific languages).
 
 \subsection{Modeling of Class Diagrams}
 \label{sec:complex-classes-in-scala}
 
 A commonly used part of UML and SysML is the class diagram. The class diagram is a visualization of data structures as nodes and edges. Nodes represent data elements and edges represent the relationships between data elements. To take an
 example, consider the class diagram in Figure \ref{fig:library}
-(the example is adopted from \cite{oclinecoreTutorial}). This diagram models libraries of books. In this diagram a box (node) denotes a type, a set of objects of that type. Hence for example \name{Library} 
-(top node, references to models are enclosed in \name{...}) denotes the type of libraries: a set
+(the example is adopted from \cite{oclinecoreTutorial}). This diagram models libraries of books. In this diagram a box (node) denotes a type, a set of objects of that type. Hence for example the top node \name{Library} 
+(references to text, for example names, in models are enclosed in \name{...}) denotes the type of libraries: a set
 of library objects each representing a library.
 A library has a name, which is a string. Note that
 such data of primitive types (strings, integers, reals, Booleans, ...) are represented as so-called {\em attributes} and are declared inside the boxes instead of as edges, although in principle they can be perceived edges to boxes representing primitive types\footnote{This is an example of a discussion
@@ -77,18 +78,22 @@ other languages, such as VDM \cite{vdm78,bjoerner-jones-82,jones90,jones-shaw-90
 
 Another textual notation coming out of the model-based engineering community itself is OCLInEcore \cite{oclinecore}, 
 which is an attempt 
-to define a textual language combining the Ecore model
-of SysML with the OCL constraint language (Object Constraint 
+to define a textual language combining the structure oriented 
+Ecore meta-model
+of the Eclipse Modeling Framework (EMF)
+\cite{emf} with the 
+OCL constraint language (Object Constraint 
 Language) 
 \cite{ocl}. OCL is a declarative expression language that is now 
 part of the UML 
 standard. OCL descended from Z, but is based on chained method 
-calls read from left to right, starting from finite collections, 
-in contrast to predicate logic. For example OCL does not have
-general universal and existential quantification over infinite 
-sets. In predicate 
+calls read from left to right, starting from {\em finite} 
+collections, in contrast to predicate logic. For example OCL does 
+not have general universal and existential quantification over 
+infinite sets. In predicate 
 logic we would write a universal quantification over a set/type 
-$S$ as follows: $\forall x : S \bullet P(x)$, meaning: for all $x$ in the set $S$, $P(x)$ is true. In OCL one would 
+$S$ as follows: $\forall x : S \bullet P(x)$, meaning: for all $x$ 
+in the set $S$, $P(x)$ is true. In OCL one would 
 write this as:
 \iocl{S->forAll(x | P(x))}. However, OCL requires $S$ to be 
 finite,
@@ -195,15 +200,16 @@ model, which in reality is very similar to a Z specification
 (signature + axioms), can (for the most part) be elegantly 
 expressed in the Scala programming language. This is shown in 
 Figure \ref{fig:book-scala}. The class \iscala{Book} extends the
-class \iscala{Block}, which offers various methods for writing 
-models, including the \iscala{invariant} method used to define 
+class \iscala{Model}, which we have programmed to offer 
+various methods for writing models, including the 
+\iscala{invariant} method used to define 
 invariants. What in the OCLInEcore model was the property 
-\iscala{loans} and the operations \iscala{isAvailable}, are here 
+\iscala{loans} and the operation \iscala{isAvailable}, are here 
 modeled as methods (using the \iscala{def} keyword). 
 Multiplicities such as \iocl{Loan[*]} are modeled using Scala's 
 collection libraries, in this case \iscala{Set[Loan]}. The Scala 
 definitions should be somewhat obvious. It is clear that Scala in 
-this case can model this problem as well as OCLInEcore. In 
+this case can model this problem in a manner comparable to OCLInEcore. In 
 addition, Scala offers so much more than OCLInEcore, such as an 
 actual programming language.
 
@@ -263,11 +269,11 @@ trait Model {
 
 The only code that has to be written to provide support for 
 writing
-class invariants is the definition of the class \iscala{Block}, 
+class invariants is the definition of the class \iscala{Model}, 
 which is shown in Figure \ref{fig:invariant-scala}. Without going 
 into details, the class defines a method \iscala{invariant},
-which as argument takes a Boolean call-by-name argument 
-The argument is not evaluated before the method is called, 
+which as argument takes a Boolean call-by-name argument. 
+The argument is not evaluated before the method body is executed, 
 rather, it is only evaluated whenever referred to. In this case
 it is stored, still unevaluated, in a list of invariants, all
 of which can then be verified on an object of this class 
@@ -275,12 +281,12 @@ with a call of \iscala{verify}. Note that such invariants
 (specifications) in addition can be the target of more formal analysis, just as they can in a formal specification language.
 
 
-\subsection{VDM Specifications}
+\subsection{\vdmpp{} Specifications}
 \label{sec:vdm-in-scala}
 
 As another example, we shall consider a chemical plant alarm 
 management system, first modeled in \vdmpp{} in 
-\cite{vdmplusplus05} and also modeled in Scala in 
+\cite{vdmplusplus05} and also later modeled in Scala in 
 \cite{havelund-scala-vdm-12}, which goes into further detail comparing \vdmpp{} and Scala. We show here a slight modification of 
 the \vdmpp{} specification as well as the 
 corresponding Scala program. In \cite{vdmplusplus05}

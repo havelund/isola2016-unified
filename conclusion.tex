@@ -28,7 +28,7 @@ elements to consider when imagining a unified approach to
 modeling and programming.
 
 
-\subsubsection{Target domains}
+\paragraph{Target domains:}
 
 We can observe three major domains of interest, namely modeling; 
 programming of non-embedded systems, such as web applications, 
@@ -42,7 +42,7 @@ different targets have an overwhelming number of language constructs in
 common, to an extent where this question at least needs to be answered
 in a scientific manner rather than in an opinionated emotional manner.
 
-\subsubsection{Predicate specifications}
+\paragraph{Predicate specifications:}
 
 A formalism must generally support specifying properties as 
 predicates rather than only as algorithms. Predicate-oriented techniques 
@@ -55,7 +55,7 @@ Note, however, that many models are very operational in
 nature, and hence can very well best be formulated as state 
 machines, or programs (data structures and algorithms). 
 
-\subsubsection{Programming in the large}
+\paragraph{Programming in the large:}
 
 A formalism must support programming in the large, and in general
 provide good modularization and component-based development. One cannot discuss components without discussing concurrency. Concurrency is an essential part of modern programming, especially 
@@ -66,7 +66,7 @@ Important concepts include agent systems, message passing based
 communication, parallel data structures (programming concurrent 
 without knowing it), and distributed programming.
 
-\subsubsection{High-level programming}
+\paragraph{High-level programming:}
 
 A formalism must support high-level programming as found in modern
 programming languages. The elegance  of functional programming has 
@@ -86,7 +86,7 @@ A formalism should be statically typed, although with type inference, and with a
 in clearly defined regions to support scripting. 
 Decades of experience in strong type systems should be harvested, including more recent  topics such as dependent types, session types, and units.
 
-\subsubsection{Low-level programming}
+\paragraph{Low-level programming:}
 
 A formalism must support low-level programming.Embedded programing often means: no dynamic memory 
 allocation after initialization, no garbage collection, some 
@@ -101,7 +101,7 @@ control. This includes support for hardware control and
 targeting specific execution platforms 
 
 
-\subsubsection{Continuous mathematics}
+\paragraph{Continuous mathematics:}
 
 A formalism must support modeling of cyber-physical systems. That
 is: physical systems controlled by computer programs. To model (not program) a cyber-physical system, there is a need for describing
@@ -112,7 +112,7 @@ and Mathematica \cite{mathematica}.
 Modelica is an object-oriented language for modeling systems containing mechanical, electrical, electronic, hydraulic, thermal, control, electric power or process-oriented subcomponents. Models can be simulated. Mathematica is a more broadly scoped symbolic mathematical computation program.
 
 
-\subsubsection{Domain-specific languages}
+\paragraph{Domain-specific languages:}
 
 A formalism must support definition of DSLs (Domain-Specific 
 Languages). A key to modeling and programming is to capture 
@@ -123,7 +123,7 @@ in this respect. It should be easy for developers to define new
 DSLs either external stand-alone, or internal extending the
 modeling/programming formalism.
 
-\subsubsection{Visualization}
+\paragraph{Visualization:}
 
 A formalism must be visualizable.
 Visualization is of extreme importance, as demonstrated by the 
@@ -142,7 +142,7 @@ other. Visualization is normally static, rendering static models as
 pictures. However, visualization can also be dynamic, of program 
 executions, illustrating how behavior evolves.
 
-\subsubsection{Analysis}
+\paragraph{Analysis:}
 
 A formalism must be analyzable.A key concept in a combined modeling and programming environment is 
 the support for advanced analysis of models/programs, including, 
@@ -160,7 +160,7 @@ algorithms. Integration of static and dynamic analysis will be
 desirable: verify what is practically feasible, and test (monitor) 
 the remaining proof obligations.
 
-\subsubsection{What modelers do that programmers don't}
+\paragraph{What modelers do that programmers don't:}
 
 A central question is how a model/program is 
 represented. Within the formal methods and programming communities

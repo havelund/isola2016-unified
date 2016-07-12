@@ -4,7 +4,7 @@
 Over the last several decades we have observed the development of a 
 large collection of specification and modeling languages and 
 associated methodologies, and tools. Their purpose is to 
-support modeling of requirements and high-level designs before 
+support formulation of requirements and high-level designs before 
 programming is initiated. Agile approaches advocate to avoid 
 explicit modeling entirely and suggest to go directly to coding. 
 Other approaches advocate avoiding manual ``coding'' in a 
@@ -23,30 +23,83 @@ development of numerous new programming languages. Few languages
 have had the success of C, which still today is the main 
 programming language for embedded systems. The success is so 
 outstanding that nearly no progress wrt. praxis has been made in 
-this domain (embedded programming) since the 1970ties, although some richer languages appeared soon after C in this domain, such as 
-C++, Ada, and Eiffel. All of these have module systems, for example, which C does not. At the same time we have seen several 
-high-level languages appear targeting the softer side of software 
+this domain (embedded programming) since the 1970ties, although 
+some richer languages appeared soon after C in this domain, such as 
+C++, Ada, and Eiffel. These later languages for example
+all have module systems, which C does not. We have seen several high-level languages appear that target the softer side of software 
 engineering (such as web-programming, user interfaces, scripting), 
 including languages such as Java, JavaScript, Ruby, Python and 
 Scala.  More academic languages include Haskell and the ML family, 
 including OCaml.
 
-In this paper we attempt to argue for a unified view of modeling
-and programming. This view can in the extreme be considered a call
+There is seemingly a strict difference between a modeling
+language and a programing language. For a
+programming language we always assume a notion of {\em 
+executability} and {\em computability}. Programming languages 
+are restricted to concepts that can be
+executed. Put differently, programming languages put emphasis on 
+the {\em ``how''}, the algorithms for solving problems.
+A specification and modeling language in principle should rather 
+focus on the {\em ``what''}. A mathematical way of phrasing this is 
+that specifications should ideally be {\em predicates} on solutions 
+(executions for example). Intuitively, one may also argue that 
+there are modeling tasks which do not directly aim at programing, 
+for instance if we model a business process independent of the 
+question which parts should be carried out by machines. This is 
+modeling, which seems far away from programming. It might be 
+interesting to bring it into a form which is closer to programming 
+if we want to simulate or automatically analyze such models. But 
+here there seems to be a boundary. Programming means computability. 
+Modeling can be more general. Finally, at a more technical level, 
+in programming, at least when we work in general purpose 
+programming languages, we have to deal with non termination and the 
+concept of undefined \cite{broy-chaos-2006}. 
+In a number of modeling approaches such 
+concepts like undefined are avoided. Here again 
+there is an interesting challenge in a unifying
+view onto modeling and programming. We would have to manage to
+introduce the concepts of undefined into modeling, representing
+nonterminating expressions in programming.  Some attempts have been
+made in	this direction though, for example 3-valued logic as 
+found in VDM.
+
+In spite of these perceived differences, the similarities between
+modeling languages and programming languages are obvious, which
+suggests a unifying view. For example, many logics support the 
+notions of local variables with bounded scopes and syntactic 
+expressions similar to programming languages. Many modeling 
+languages even offer programming constructs, such as mutable 
+variables, 
+assignment statements, and looping (while) statements, and of course recursion. Furthermore, some of the modeling 
+languages, such as UML, are deeply influenced by programming 
+languages wrt. how models are structured. In particular, the idea 
+of object-oriented modeling is taken from the concept of object-
+oriented programming. It is even considered one of the strong sides 
+of object-orientation, that one can have a unified view of 
+object-oriented specification, object-oriented design, and 
+object-oriented programming. In summary, the concepts that 
+are used in modeling and the concepts that are used in 
+programming are so closely related that it is beneficial to attempt 
+a unified view.
+
+In this paper we attempt to argue for such a unified view 
+of modeling and programming. This view can in the extreme be 
+considered a call
 for a single universal formalism for modeling and programming any
 form of system. This is done by high-lighting some trends in 
 modeling and programming, and by programming some example
 models in the Scala programming language, a high-level formalism
 suited for this purpose.
-However, we fully understand that this is not likely
-to happen. What we intend is to fuel an {\em effort} to at least consider
+However, we fully understand that such a unification faces many
+obstacles, some of which are non-technical. 
+What we intend is to fuel an {\em effort} to at least consider
 merging efforts to the extent feasible. We believe that the model-based
 engineering community can learn from the formal methods and 
 programming communities, and vice versa. Note that even if a single
 formalism would appear, there will always be alternatives, just like
 there are multiple programming languages (evolution continues). 
 
-This paper is organized as follows.
+The paper is organized as follows.
 In Section \ref{sec:trends} we give a brief overview of some 
 of the trends in modeling and programming, that we consider important. 
 In Section \ref{sec:modeling-as-programming} we illustrate with examples how modeling can be perceived as programming. 
@@ -56,4 +109,3 @@ Finally Section \ref{sec:conclusion} outlines
 brief discussion points to be reflected on
 when considering a unified approach, as well
 as a conclusion.
-

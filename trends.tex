@@ -9,16 +9,31 @@ formal methods, model-based engineering, and programming, that we find worthwhil
 ({\em Recursive Functions of Symbolic Expressions and Their 
 Computation by Machines} \cite{Mc60} and 
 {\em Towards a Mathematical Science of Computation} \cite{Mc62a}), 
-Robert Floyd ({\em Assigning Meanings to Programs} \cite{Flo67}), Edsger Dijkstra ({\em A Discipline of Programming} \cite{EWD1}), 
-Tony Hoare ({\em An Axiomatic Basis for Computer Programming} \cite{Hoa69}), and Dana Scott and Christopher 
+Robert Floyd ({\em Assigning Meanings to Programs} \cite{Flo67}), 
+Edsger Dijkstra ({\em A Discipline of Programming} \cite{EWD1}), 
+Tony Hoare ({\em An Axiomatic Basis for Computer Programming} 
+\cite{Hoa69}), and Dana Scott and Christopher 
 Strachey ({\em Towards a Mathematical Semantics for Computer 
-Languages} \cite{Sco71}), to mention a few. These ideas were theoretic in nature and deeply influential. They brought us the ideas of  annotating programs with assertions, such as pre- and post-conditions, and invariants, correct by construction development (refinement), and giving semantics to programming languages. 
+Languages} \cite{Sco71}), to mention a few. These ideas were 
+theoretic in nature and deeply influential. They brought us the 
+ideas of  annotating programs with assertions, such as pre- and 
+post-conditions, and invariants, correct by construction 
+development (refinement), and giving semantics to programming 
+languages. 
 These ideas were subsequently the basis for several, what we could 
 call, second generation formal specification languages such as 
-VDM, Z, B, CIP, TLA, RAISE, and OBJ, to mention just a few. 
-Each of these languages were full 
-specification languages, most with rich type systems and detailed rules 
-(grammars) for what constitutes a valid specification. These 
+VDM 
+\cite{vdm78,bjoerner-jones-82,jones90,jones-shaw-90},  
+\vdmpp{} \cite{vdmplusplus05},
+Z \cite{Spivey-Z-92}, B and Event-B \cite{abrial-eventb-10}, CIP 
+\cite{cip-1985}, TLA \cite{lamport-TLA-1994}, RAISE 
+%\cite{raise92,george-raise-2008,havelund-losl-08}, 
+\cite{raise92,george-raise-2008},
+and OBJ 
+\cite{futatsugi-obj-1985}, to mention just a few. Each of these 
+languages were full 
+specification languages, most with rich type systems and detailed 
+rules (grammars) for what constitutes a valid specification. These 
 languages were ahead of their time wrt. language features in the 
 sense that many of these features have found their 
 way into modern programming languages of today. A particular
@@ -43,12 +58,13 @@ so-called {\em model oriented} specification languages,
 meaning that a specification is an example model of the desired system. This means that such specifications are somewhat close to high-level programs. This is in contrast to so-called {\em property oriented} (algebraic) specification languages, such as OBJ, where a specification denotes a set of models\footnote{This characteristic of the difference is somewhat simplified since a VDM specification in fact also can denote more than one model.}.  A different branch of formal methods includes theorem proving and 
 model checking. In theorem proving we have seen specification 
 languages, which resemble functional programming languages, 
-including for example ACL, PVS and Coq. In model checking, early 
+including for example Isabelle \cite{isabelle}, PVS \cite{pvs}, and Coq \cite{coq}. In model checking, early 
 work focused on modeling notations somewhat removed from 
 programming languages. However, recent research has focused on 
 software model checking, where the target of model checking is 
-code, as for example seen in the Java PathFinder model checker, 
-JPF. JPF was created due to the observation that a powerful 
+code, as for example seen in the Java PathFinder model checker 
+(JPF) \cite{havelund-jpf-00,havelund-visser02}. JPF was created due 
+to the observation that a powerful 
 programming language might be a better modeling language than the 
 traditional model checker input languages. Today’s 
 efforts in model checking furthermore include numerous efforts in 
@@ -69,8 +85,9 @@ design and implementation language.
 
 \subsection{Model-based Engineering}Model-based engineering includes modeling frameworks that are 
 usually visual/graphical of nature. One of the main contributions 
-in this field is UML for software development, and its derivatives, 
-such as SysML for systems development. The graphical nature of the 
+in this field is UML \cite{uml} for software development, and its 
+derivatives, such as SysML \cite{sysml} for systems development. 
+The graphical nature of the 
 UML family of languages has caused it to become rather popular and 
 wide-spread in engineering communities. Engineers are more willing 
 to work with graphical notations, such as 

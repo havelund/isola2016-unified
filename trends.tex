@@ -23,15 +23,15 @@ languages.
 These ideas were subsequently the basis for several, what we could 
 call, second generation formal specification languages such as 
 VDM 
-\cite{vdm78,bjoerner-jones-82,jones90,jones-shaw-90},  
+\cite{vdm78,bjoerner-jones-82,jones90},  
 \vdmpp{} \cite{vdmplusplus05},
 Z \cite{Spivey-Z-92}, B and Event-B \cite{abrial-eventb-10}, CIP 
 \cite{cip-1985}, TLA \cite{lamport-TLA-1994}, RAISE 
 %\cite{raise92,george-raise-2008,havelund-losl-08}, 
-\cite{raise92,george-raise-2008},
+\cite{raise92},
 and OBJ 
 \cite{futatsugi-obj-1985}, to mention just a few. Each of these 
-languages were full 
+languages are full 
 specification languages, most with rich type systems and detailed 
 rules (grammars) for what constitutes a valid specification. These 
 languages were ahead of their time wrt. language features in the 
@@ -43,7 +43,7 @@ constructs and low level programming like constructs. The
 methodology 
 consists in part, as in CIP, of refining a high-level specification 
 into a low-level program like specification in a stepwise manner. 
-The language offered concepts 
+The language offers concepts 
 such as the combination of imperative (procedural and later 
 object-oriented in \vdmpp) and functional programming; exceptions; 
 algebraic data types and pattern matching; functions as values and 
@@ -59,16 +59,18 @@ meaning that a specification is an example model of the desired system. This mea
 model checking. In theorem proving we have seen specification 
 languages, which resemble functional programming languages, 
 including for example Isabelle \cite{isabelle}, PVS \cite{pvs}, and Coq \cite{coq}. In model checking, early 
-work focused on modeling notations somewhat removed from 
-programming languages. However, recent research has focused on 
+work, such as Spin \cite{holzmann-spin-2004}, 
+focused on modeling notations. However, recent research has 
+focused on 
 software model checking, where the target of model checking is 
 code, as for example seen in the Java PathFinder model checker 
-(JPF) \cite{havelund-jpf-00,havelund-visser02}. JPF was created due 
-to the observation that a powerful 
-programming language might be a better modeling language than the 
-traditional model checker input languages. Today’s 
-efforts in model checking furthermore include numerous efforts in 
-model checking of C programs.As can be seen from the above discussion, formal specification 
+(JPF) \cite{havelund-jpf-00,havelund-visser02}, and in 
+Modex \cite{holzmann-spin-2004} (for C). 
+JPF was created due to the observation that a powerful 
+programming language might be a more convenient 
+modeling language than the 
+traditional model checker input languages. Numerous 
+model checkers now target C.As can be seen from the above discussion, formal specification 
 languages have for a long time been flirting with programming 
 language like notations, and vice versa. However, the two classes of languages have by tradition been considered as belonging to 
 strictly separate categories. VDM for example was always, and still 
@@ -109,12 +111,20 @@ into programming languages, in spite of its usefulness in
 especially embedded programming. UML and SysML also support 
 requirements (as special comments), a concept that usually is not embedded as a first citizen in programming. 
 %It would be interesting to see requirements as part of programming.The above observations are rather positive. However, UML and
-SysML are very complex and weakly defined formalisms. 
-For example, the combined syntax for all of UML corresponds 
-to the sum of approximately 20 programming languages (approximately 
-17,000 lines of abstract syntax, a programming language can 
-normally be defined in between 500 and 2500 lines of grammar 
-rules). The UML/SysML standards are long and complex documents. 
+SysML are very complexly and weakly defined formalisms. 
+% ------\
+For example, the (human unreadable) abstract syntax for UML (including OCL, 
+in a different document) is 11605 lines
+of XML, whereas the typical (human readable) concrete syntax (grammar) 
+for a programming language is between 500 and 2500 lines. 
+% ------
+%For example, the combined syntax for all of UML corresponds 
+%to the sum of approximately 20 programming languages (approximately 
+%17,000 lines of abstract syntax, a programming language can 
+%normally be defined in between 500 and 2500 lines of grammar 
+%rules). 
+% ------/
+The UML/SysML standards are long and complex documents. 
 Furthermore, the connection between models and code is fragile, relying on the correctness of translators from for example UML state machines to code. Finally, a discussion about semantics
 (what do two boxes with a line in between mean?) can turn 
 a project meeting into chaos.
@@ -123,11 +133,28 @@ a project meeting into chaos.
 \subsection{Programming}Several new programming languages have emerged over the last 
 decades, which include abstraction mechanisms known from the formal 
 specification languages mentioned above. Such languages include 
-Eiffel, Java, Python, Scala, Julia, Fortress,  C\#, Spec\#, F\#,  Dafny, D, 
-RUST, Swift, Go, Agda, and SPARK.  Some languages support 
+SPARK Ada,
+Eiffel, 
+Java, 
+Python, 
+Scala, 
+Julia, 
+Fortress,  
+C\#, 
+Spec\#, 
+F\#,  
+D, 
+RUST, 
+Swift, 
+Go, 
+Dafny,
+and
+Agda.  
+Some languages support 
 design-by-contract with pre-post conditions, and in some cases with 
-invariants. These languages  include for example Eiffel, Spec\#, 
-Dafny, SPARK, and to some limited extent Scala. Java supports 
+invariants. These languages  include for example 
+SPARK Ada, Eiffel, Spec\#, Dafny, and to some limited extent Scala. 
+Java supports 
 contracts through JML, which, however, is not integrated with Java, 
 but an add-on comment language (JML specifications are comments in 
 a Java program). Most of the languages above support abstract 
@@ -138,7 +165,7 @@ notation for collections very similar to VDM. The systems
 Dafny and Why3 are amongst the newest branches of work, 
 interesting since these languages are developed 
 specifically with verification in mind.A trend on the rise is the combination of object-oriented 
-and functional programming, as seen in perhaps most prominently 
+and functional programming, as seen perhaps most prominently in
 Scala, but also in the earlier Python, and now in Java which got 
 closures in version 1.8.  Ocaml is a similar earlier attempt to 
 integrate object-oriented and functional programming, although in a 
@@ -151,6 +178,7 @@ VDM) and session types. Session types are temporal patterns that
 can be checked at compile time. They are much related to temporal 
 logic as used within the formal methods community to express 
 properties of concurrent programs. At the same time there are also 
-attempts to make more conservative moves away from C, but without 
-losing too much efficiency. Examples include the languages Go, D and RUST. However, as stated earlier, C has an impressive staying power, and these attempts have not yet made the highway.
+attempts to move away from C, but without 
+losing too much efficiency. Examples include the languages Go, D and RUST. However, as stated earlier, C has an impressive staying power, and none of
+such attempts have yet become main stream.
 

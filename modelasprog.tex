@@ -8,7 +8,7 @@ a small collection of examples, illustrating how what is normally
 considered as modeling can be perceived as programming. 
 Models are encoded in the Scala programming language, which is
 sufficiently high-level to illustrate the point.
-We start with class diagrams, as found in UML and SysML, then move on to a classical formal specification language such as \vdmpp{}, and finally discuss DSLs (domain-specific languages).
+We start with class diagrams, as found in UML and SysML, then move on to a classical formal specification language such as \vdmpp{}, and finally discuss DSLs (Domain-Specific Languages).
 
 \subsection{Modeling of Class Diagrams}
 \label{sec:complex-classes-in-scala}
@@ -52,15 +52,15 @@ associated a collection of (current) loans.
 In many modeling situations such diagrams form the core of the 
 modeling effort. Constraints can be added to such diagrams.
 For example one constraint could be that the number of copies of a 
-book should be a number bigger than or equal to 1. Such a 
-constraint can be added inside special constraint box on the 
+book should be positive. Such a 
+constraint (not shown) can be added inside a special constraint box on the 
 diagram  in Figure \ref{fig:library}, attached to the \name{Book} 
 box with a dotted line. It is interesting to note, that a 
 box with an associated constraint (written in another box and linked with a line) conceptually is very similar 
 to the idea of a Z schema \cite{Spivey-Z-92}, as shown in Figure 
 \ref{fig:book-z}\footnote{Note that the constraint can actually be 
-avoided in Z by  defining the type of \izlang{copies} to be $
-\mathbb{N}_1$, the natural numbers starting from 1.}.
+avoided in Z by  defining the type of \izlang{copies} to be 
+$\mathbb{N}_1$, the natural numbers starting from 1.}.
 This schema represents the fundamental concept of a model: a 
 signature (the declaration of \izlang{name} and \izlang{copies} above 
 the line with their types) and then zero or more axioms (below the 
@@ -74,7 +74,7 @@ The expression language of K as well as Z
 logic. Both languages support datatypes such as sets, including 
 advanced set expressions such as set comprehension. K is 
 object-oriented and is inspired by Z, as well as by
-other languages, such as VDM \cite{vdm78,bjoerner-jones-82,jones90,jones-shaw-90,vdmplusplus05} and RAISE \cite{raise92}. 
+other languages, such as VDM \cite{vdm78,bjoerner-jones-82,jones90,vdmplusplus05} and RAISE \cite{raise92}. 
 
 Another textual notation coming out of the model-based engineering community itself is OCLInEcore \cite{oclinecore}, 
 which is an attempt 
@@ -138,8 +138,8 @@ type (those drawn as boxes in class diagrams).
 The property \iocl{library} links a book to the library it is part 
 of, and is the ``{\em opposite property}'' of the \iocl{books} 
 property of the \iocl{Library} (expressed using the \iocl{#}-
-notation), meaning that if a book is in the \iocl{books} set (a 
-bag in fact) of a library, then the library is also in the 
+notation), meaning that if a book is in the \iocl{books} set (technically 
+a bag) of a library, then the library is also in the 
 \iocl{library} of the book. The `\iocl{?}' represents 0 or 1.
 
 \begin{figure}
@@ -189,8 +189,7 @@ set \iocl{S}. Hence in this case the
 \iocl{select(predicate)} method is defined on sets and returns the 
 subset of elements of the set satisfying the predicate.
 The two invariants can now be formulated, and their explanation should at this point be straight forward.
-The {\em operation} \iocl{isAvailable} is defined to illustrate that one can also define such, here with a body as an 
-OCL expression. One can also define operations with side-effects specified with pre/post conditions. No code with side-effects is allowed in 
+The {\em operation} \iocl{isAvailable} is defined to illustrate that one can also define such, here with an OCL expression as body. One can also define operations with side-effects specified with pre/post conditions. No code with side-effects, however, is allowed in 
 bodies of operations, which seems to be a limitation, and a sign
 of an attempt to move towards a programming language, but not all
 the way.
@@ -327,7 +326,7 @@ instance variables} (mutable variables), {\em functions} (with no
 side-effects), and {\em operations} (with side-effects). An 
 invariant defined by the function \ivdm{PlantInv} is imposed on 
 the instance variables. The corresponding Scala program modeling the plant is shown in Figure \ref{fig:plant-scala}. We shall not go into the further details, except for mentioning the use of the
-\ivdm{suchthat} method, defined in the \ivdm{Model} class, 
+\ivdm{suchthat} method in the Scala program, defined in the \ivdm{Model} class, 
 which from a finite set selects an element satisfying a predicate provided as argument.
 
 \begin{figure}
@@ -344,7 +343,8 @@ class Plant
  functions
     PlantInv: set of Alarm * map Period to set of Expert -> bool
     PlantInv(as,sch) ==
-      (forall p in set dom sch & sch(p) <> {}) and
+      (forall p in set dom sch & sch(p) <> {}) 
+        and
       (forall a in set as &
          forall p in set dom sch & 
            exists expert in set sch(p) &
@@ -384,17 +384,16 @@ trait Plant extends Model {
 
   invariant{PlantInv(alarms, schedule)}
 
-  def PlantInv(alarms: Set[Alarm], schedule: Map[Period, 
-  Set[Expert]]): Boolean =
-    (schedule.keySet forall {p =>  schedule(p) != Set() }) &&
-      (alarms forall { a =>
-        schedule.keySet forall { p =>
-          schedule(p) exists { expert =>
-            a.reqQuali in expert.quali
-          }
+  def PlantInv(alarms: Set[Alarm], schedule: Map[Period, Set[Expert]]): Boolean =
+    (schedule.keySet forall {p =>  schedule(p) != Set()}) 
+      &&
+    (alarms forall { a =>
+      schedule.keySet forall { p =>
+        schedule(p) exists { expert =>
+          a.reqQuali in expert.quali
         }
-      })
-
+      }
+    })
 
   def ExpertToPage(a: Alarm, p: Period): Expert = {
     require((a in alarms) && (p in schedule.keySet))
@@ -424,7 +423,7 @@ an essential part of a modeling/programming framework. This form of
 activity is supported 
 within the UML/SysML community through meta-modeling and profiles. 
 Programming languages have been slower to pick up this concept, 
-although an early language such as LISP supported macros
+although an early language such as Lisp supported macros
 from its birth. A modern programming language such as Scala 
 supports definition of
 so-called {\em internal} DSLs with a collection of a few 
@@ -457,7 +456,7 @@ monitoring lock operations}
 \label{fig:deadlocks-scala}
 \end{figure}
 
-The DSL illustrated here is the LogFire \cite{havelund-logfire-sttt14},
+The DSL illustrated here is LogFire \cite{havelund-logfire-sttt14},
 created for rule-based programming, and specifically for 
 writing temporal trace properties. We shall not go into the details of LogFire (the reader is referred to \cite{havelund-logfire-sttt14}), but only show a model written in this DSL, 
 and briefly explain how the DSL is defined. 
@@ -471,10 +470,10 @@ A monitor is specified as a set of rules, each of the form:
 A rule consists of a left-hand side: a list of conditions, and a 
 right-hand side:
 an action. The rules operate on a set of facts, the 
-{\em fact memory} (implemented as a RETE network \cite{forgy-rete-82}) 
+{\em fact memory} (implemented as a Rete network \cite{forgy-rete-82}) 
 where conditions check the presence or absence of certain facts, 
 and the action adds or deletes 
-facts, or execute any Scala code inserted as an action. Figure 
+facts, or executes any Scala code inserted as part of the action. Figure 
 \ref{fig:deadlocks-scala} illustrates 
 a monitor, which monitors $acquire(thread,lock)$ and 
 $release(thread,lock)$ events emitted from an instrumented 
